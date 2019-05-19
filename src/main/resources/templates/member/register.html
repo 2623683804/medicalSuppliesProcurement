@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head>
+		<title>海马账户注册 - 海马医疗耗材采购官网</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+		<link th:href="@{/css/commonn.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/reg.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/select.css}"  rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{css/base.css}" />
+		<link rel="stylesheet" th:href="@{css/pop.css}" />
+		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
+	</head>
+	<body class="login-bg">
+
+
+		<div id="reg-header">
+			<div class="width-wrap cl">
+				<p class="right-wrap sz14 lh48 mr">
+					<span class="hot-line-color">服务热线 &nbsp;</span>
+					<em class=" font-pro sz18">400-100-8899（08:00-20:00）</em>
+				</p>
+				<h2 class="logo left-wrap ml5">
+					<a th:href="@{/index.html}">
+						<img th:src="@{/img/logo.png}" width="35%" height="25%" alt="海马">
+					</a>
+				</h2>
+			</div>
+		</div>
+		<div class="width-wrap reg-bg">
+			<div class="reg-title cl">
+				<span class="right-wrap reg_link">已有账号？ <a th:href="@{/member/login.html}" rel="nofollow" class="fs5">立即登录</a></span>
+				<h2>注册<span class="sz14 fs2"></span></h2>
+			</div>
+			<div class="reg-content">
+				<form id="reg-form" autocomplete="off" class="reg-form delpt" novalidate="novalidate" action="" >
+					<div class="control-reg relative mt">
+						<label class="login-label label-letter">用户名</label>
+						<input class="reg-input login-input-width" tabindex="0" type="text" placeholder="请输入用户名">
+					</div>
+					<div class="login-error fs4"></div>
+					<div id="imgContent" class="control-reg relative">
+						<label class="login-label label-letter-1" for="imgCodeInput">图形验证码</label>
+						<span class="code-reg"><img id="image" src="/nbigfront/entrance/qyduser/getCommonCodeImage?validateKey=57" width="90" height="40"></span>
+						<input class="reg-input login-input-width" id="imgCodeInput" name="imgCodeInput" maxlength="6" type="text" value="" placeholder="请输入图形验证码">
+					</div>
+
+					<div class="login-error fs4"></div>
+					<div class="control-reg relative">
+						<label class="login-label label-letter-2" for="txtLogPwd">设置登录密码</label>
+						<i id="ipwdeye" class="progess-icon eye-icon delbl eye-position eye-close-icon"></i>
+						<input type="password" name="txtLogPwd" class="ignore" style="display: none;">
+						<input class="reg-input login-input-width" type="password" maxlength="16" id="txtLogPwd" name="txtLogPwd" tabindex="4" autocorrect="off" autocapitalize="off" placeholder="">
+					</div>
+
+<!--					<div class="login-error fs4"></div>-->
+
+					<div><input class="button login-button sz16 drdc" type="submit" tabindex="6" value="立即注册"></div>
+				</form>
+			</div>
+		</div>
+		<div class="reg-copy width-wrap align-center sz14 fs1">
+			<p>Copyright© 2019 海马科技有限公司 版权所有
+			</p>
+		</div>
+		
+	</body>
+    <script type="text/javascript" th:src="@{js/core.js}" ></script>
+
+</html>
+

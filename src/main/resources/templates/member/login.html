@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+		<title>稳健运营 合规发展_海马账户登录 - 海马官网</title>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+		<link th:href="@{/css/commonn.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/reg.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/pop.css}" rel="stylesheet" type="text/css">
+		
+	</head>
+
+	<body class="login-bg" style="position: absolute;top: 0;bottom: 0;left: 0;right: 0;">
+
+		<!--logo开始-->
+		<div id="reg-header">
+			<div class="width-wrap cl">
+				<p class="right-wrap sz14 lh48 mr">
+					<span class="hot-line-color">服务热线&nbsp;</span>
+					<em class=" font-pro sz18">400-100-8899（08:00-20:00）</em>
+				</p>
+				<h2 class="logo left-wrap ml5">
+					<a th:href="@{/index.html}">
+					<img th:src="@{/img/logo.png}"  alt="海马" width="35%" height="25%">
+					</a>
+				</h2>
+			</div>
+		</div>
+		<!--logo结束-->
+		<div class="width-wrap cl">
+			<div id="banner" class="left-reg">
+				<img th:src="@{/img/zc.jpg}" width="650" height="630">
+			</div>
+			<div class="right-reg cl">
+				<span class="right-wrap login_link">没有账号？<a th:href="@{/member/register}" rel="nofollow" class="fs5 ml5">立即注册</a></span>
+				<h2>登录</h2>
+				<form id="reg-form" class="reg-form pb20" method="post" autocomplete="off" th:action="@{/login/form}">
+					<input name="name" type="text" style="display:none">
+					<div class="control-reg mb20">
+						<input id="name" name="username"  class="reg-input" data-rule-required="true" type="text" autocorrect="off" autocapitalize="off" placeholder="请输入用户名" tabindex="1">
+					</div>
+					<div class="control-reg mb20">
+						<input id="pwd" name="password" class="reg-input" data-rule-required="true" type="password" autocorrect="off" autocapitalize="off" placeholder="请输入密码" tabindex="2">
+					</div>
+
+					<div class="control-reg mb20 cl">
+						<a th:href="@{/usermanagement/}" class="right-wrap sz14 fs1 mt5">忘记密码？</a>
+
+					</div>
+					<div>
+						<input class="button reg-button sz16 drdc" type="submit" value="立即登录" tabindex="4"></div>
+
+					<div class="reg-error">
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="reg-copy width-wrap align-center sz14 fs1">
+			<p>Copyright© 2019 海马科技有限公司 版权所有
+			</p>
+		</div>
+
+
+
+	</body>
+
+</html>

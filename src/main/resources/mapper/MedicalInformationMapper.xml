@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaiyuan.management.dao.MedicalInformationMapper">
+
+
+    <select id="QueryNumber" resultType="java.lang.Integer">
+        select count(id)
+        from medical_information
+        where  1=1
+        <if test="user_id!=null and user_id!=''">and user_id like  concat('%',#{user_id},'%')</if>
+        <if test="name!=null and name!=''">and name like  concat('%',#{name},'%')</if>
+        <if test="status!=null and status!=''">and status = #{status}</if>
+    </select>
+
+    <select id="queryfyList" parameterType="String"  resultType="com.kaiyuan.management.entity.MedicalInformation">
+        select *
+        from medical_information
+        where  1=1
+        <if test="user_id!=null and user_id!=''">and user_id like  concat('%',#{user_id},'%')</if>
+        <if test="name!=null and name!=''">and name like  concat('%',#{name},'%')</if>
+        <if test="status!=null and status!=''">and status = #{status}</if>
+        <if test="start!=null">
+        limit #{start} ,10
+        </if>
+    </select>
+
+    <!--<select id="findQueryl"   resultType="java.lang.Integer">-->
+    <!--select count(id)-->
+    <!--from medical_information-->
+
+    <!--</select>-->
+    <!--<select id="queryfyList" resultType="com.kaiyuan.management.entity.MedicalInformation">-->
+		<!--select * from medical_information limit #{startrow} , #{pagesize}-->
+	<!--</select>-->
+
+
+    <insert id="addMedicalInformation">
+		insert into medical_information(name,user_id,status,create_time,update_time) values (#{name},#{user_id},#{status},#{create_time},#{update_time})
+	</insert>
+
+
+    <update id="updateMedicalInformation">
+		update medical_information
+		set
+		name=#{name},
+		user_id=#{user_id},
+		status=#{status} ,
+		update_time=#{update_time}
+		where id=#{id}
+
+	</update>
+
+    <delete id="deleteMedical" parameterType="Integer">
+     	delete from medical_information where id= #{id}
+	</delete>
+
+
+</mapper>

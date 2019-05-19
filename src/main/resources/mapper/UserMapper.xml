@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaiyuan.user.dao.UserMapper">
+
+    <resultMap id="userMap" type="com.kaiyuan.user.entity.SysUser">
+        <id property="id" column="ID"/>
+        <result property="username" column="username"/>
+        <result property="password" column="PASSWORD"/>
+        <collection property="roles" ofType="com.kaiyuan.user.entity.SysRole">
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <select id="findByUserName" parameterType="String"
+            resultMap="userMap">
+        select u.*
+        ,r.name
+        from Sys_User u
+        LEFT JOIN sys_role_user sru on u.id= sru.Sys_User_id
+        LEFT JOIN Sys_Role r on sru.Sys_Role_id=r.id
+        where username= #{username}
+    </select>
+
+
+    <!--<resultMap id="userall" type="com.kaiyuan.user.entity.User"></resultMap>-->
+
+    <!--<select id="getUserByUsername" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
+ 		 <!--SELECT  *-->
+ 		 <!--FROM s_user-->
+ 		 <!--WHERE username = #{username}-->
+ 	 <!--</select>-->
+
+    <!--<select id="selectUserbyuserName" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
+        <!--&lt;!&ndash;根据用户名称查询用户信息&ndash;&gt;-->
+        <!--SELECT id,name,age FROM t_user where name=#{userName}-->
+    <!--</select>-->
+
+    <!--<select id="selectUserbyid" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
+        <!--&lt;!&ndash;根据用户ID查询用户信息&ndash;&gt;-->
+        <!--SELECT id,name,age FROM t_user where id=#{userId}-->
+    <!--</select>-->
+
+    <!--<select id="selectUseruserAge" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
+        <!--&lt;!&ndash;根据用户age查询用户信息&ndash;&gt;-->
+        <!--SELECT id,name,age FROM t_user where age = #{userAge}-->
+    <!--</select>-->
+
+
+    <!--<insert id="insertUser">-->
+		<!--insert into t_user(id,name,age) values (#{id},#{name},#{age})-->
+	<!--</insert>-->
+
+
+    <!--<update id="updateUser">-->
+		<!--update t_user set name=#{name},age=#{age} where id=#{id}-->
+	<!--</update>-->
+
+    <!--<delete id="deleteUser" parameterType="Integer">-->
+     	<!--delete from t_user where id= #{id}-->
+	<!--</delete>-->
+
+
+</mapper>

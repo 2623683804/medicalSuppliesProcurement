@@ -1,0 +1,269 @@
+@charset "utf-8";
+input:-webkit-autofill,select:-webkit-autofill,textarea:-webkit-autofill {
+ -webkit-box-shadow:0 0 0 1000px #fff inset
+}
+.login-bg {
+ background:#f4f7fc
+}
+#reg-header {
+ margin:30px 0
+}
+.hot-line-color {
+ color:#8c929d
+}
+.left-reg {
+ float:left;
+ width:650px;
+ height:630px;
+ background-color:#fff
+}
+.right-reg {
+ background:#fff;
+ float:right;
+ width:379px;
+ height:502px;
+ padding:64px 75px
+}
+.right-reg h2 {
+ font-size:20px;
+ color:#333;
+ font-weight:400
+}
+.right-reg .login_link {
+ font-size:14px;
+ color:#8c929d;
+ line-height:28px
+}
+.right-reg .login_link a:hover {
+ text-decoration:underline
+}
+.reg-form {
+ padding:32px 0
+}
+.mb20 {
+ margin-bottom:20px
+}
+.control-reg a:hover {
+ text-decoration:underline
+}
+.reg-form .reg-input {
+ height:52px;
+ border:1px solid #d3d8dd;
+ line-height:52px;
+ font-size:14px;
+ width:346px;
+ padding:0 16px;
+ -webkit-transition:all .2s linear 0s;
+ -o-transition:all .2s linear 0s;
+ -moz-transition:all .2s linear 0s;
+ transition:all .2s linear 0s
+}
+.reg-form .reg-input:focus {
+ -webkit-box-shadow:0 0 12px rgba(201,211,225,1);
+ -moz-box-shadow:0 0 12px rgba(201,211,225,1);
+ box-shadow:0 0 12px rgba(201,211,225,1)
+}
+.reg-form .pwdover {
+ position:absolute;
+ right:47px;
+ bottom:1px;
+ background:#fff;
+ z-index:1
+}
+.reg-input-error {
+ border:1px solid #ff6868!important
+}
+.reg-error {
+ font-size:14px;
+ color:#ff6868;
+ min-height:36px;
+ height:auto!important;
+ margin-bottom:10px;
+ line-height:24px
+}
+.reg-error a {
+ text-decoration:underline
+}
+.reg-button {
+ width:380px;
+ height:54px!important
+}
+.login-button {
+ width:449px;
+ height:54px!important;
+ margin-top:50px
+}
+.reg-warning {
+ font-size:14px;
+ line-height:24px
+}
+.reg-copy {
+ padding-top:45px
+}
+.login-input-width {
+ width:291px!important;
+ padding-left:139px!important
+}
+.login-label {
+ position:absolute;
+ left:16px;
+ top:1px;
+ width:110px;
+ height:52px;
+ line-height:52px;
+ background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAA0CAYAAABLolKXAAAAJklEQVR42mL4//8/AxMDEBBD3Lr3FMH9T7Q2ehKMDCT5CEQABBgAvDAJ/PRbPDAAAAAASUVORK5CYII=) no-repeat right center;
+ font-size:14px;
+ color:#666!important
+}
+.label-letter {
+ letter-spacing:13px
+}
+.label-letter-1 {
+ letter-spacing:6.4px
+}
+.label-letter-2 {
+ letter-spacing:2px
+}
+.code-reg {
+ position:absolute;
+ top:7px;
+ right:20px;
+ display:inline-block
+}
+.code-login-button {
+ width:120px;
+ height:46px;
+ font-size:14px;
+ border:none;
+ line-height:46px;
+ background:#eff2f6;
+ position:absolute;
+ top:4px;
+ right:21px;
+ color:#666;
+ cursor:pointer
+}
+.code-login-button:hover {
+ background:#e4e9f1
+}
+.code-disabled {
+ background:#e4e9f1;
+ color:#999;
+ cursor:auto
+}
+.login-error {
+ min-height:32px;
+ line-height:30px
+}
+.login-error a {
+ text-decoration:underline
+}
+.login-yuyin {
+ position:absolute;
+ left:470px;
+ bottom:2px;
+ width:290px
+}
+.invi-code {
+ width:409px;
+ padding:0 20px;
+ height:54px;
+ line-height:54px;
+ background:#f8fafd;
+ color:#999;
+ font-size:14px;
+ display:inline-block
+}
+.invi-code:hover {
+ text-decoration:none!important
+}
+.invi-code i {
+ position:absolute;
+ left:210px;
+ top:24px
+}
+.reg-step-icon {
+ background:url(data:image/png;base64,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) no-repeat;
+ vertical-align:middle;
+ display:inline-block
+}
+.reg-step-icon-1,
+.reg-step-icon-2,
+.reg-step-icon-2-finished,
+.reg-step-icon-3,
+.reg-step-icon-3-finished {
+ width:32px;
+ height:32px;
+ padding-right:8px
+}
+.reg-step-icon-1 {
+ background-position:-1px -39px
+}
+.reg-step-icon-2 {
+ background-position:-51px 0
+}
+.reg-step-icon-2-finished {
+ background-position:-51px -39px
+}
+.reg-step-icon-3 {
+ background-position:-101px 0
+}
+.reg-step-icon-3-finished {
+ background-position:-101px -39px
+}
+.reg-remind,
+.reg-remind-error {
+ width:16px;
+ height:16px;
+ margin-right:5px;
+ margin-bottom:4px
+}
+.reg-remind {
+ background-position:-25px 0
+}
+.reg-remind-error {
+ background-position:0 0
+}
+.reg-bg {
+ background:#fff!important
+}
+.reg-color {
+ color:#3d4453!important
+}
+.reg-title {
+ height:70px;
+ line-height:70px;
+ border-bottom:1px solid #eef1f6;
+ padding:0 25px
+}
+.reg-title h2 {
+ font-size:20px;
+ font-weight:400
+}
+.reg-title .reg_link {
+ font-size:14px!important;
+ color:#8c929d!important
+}
+.reg-title .reg_link a:hover {
+ text-decoration:underline
+}
+.reg-content {
+ width:462px;
+ margin:84px auto 0;
+ padding-bottom:100px
+}
+.reg-step {
+ padding:0 9px
+}
+.reg-step li {
+ float:left;
+ font-size:14px;
+ line-height:32px;
+ width:98px;
+ color:#bbb
+}
+.reg-step li.line {
+ background-position:-145px 0;
+ width:68px;
+ height:32px
+}

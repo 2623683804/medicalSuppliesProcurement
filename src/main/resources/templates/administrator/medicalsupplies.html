@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<meta charset="UTF-8">
+		<title>海马医用品信息管理 - 海马官网</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/commonn.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/pop.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
+        <script type="text/javascript">
+            function updateMed(a){
+                //可正常赋值
+               $("#yid").attr("value",a);
+            }
+        </script>
+	</head>
+
+	<body>
+	<div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+		<div th:include="common/header_xt" ></div>
+	</div>
+
+	<div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
+		<div th:include="common/header_gys" ></div>
+	</div>
+	<div sec:authorize="hasRole('ROLE_SPGLY')"> <!-- 用户类型为ROLE_SPGLY 显示 -->
+		<div th:include="common/header_sp" ></div>
+	</div>
+	<div sec:authorize="hasRole('ROLE_CGGLY')"> <!-- 用户类型为ROLE_CGGLY 显示 -->
+		<div th:include="common/header_cx" ></div>
+	</div>
+	<div sec:authorize="hasRole('ROLE_YYPGLY')"> <!-- 用户类型为ROLE_YYPGLY 显示 -->
+		<div th:include="common/header_yyp" ></div>
+	</div>
+		<div class="wrap">
+			<!--内容开始-->
+			<div class="containermcompany">
+				<div class="width-wrap white-bg add-border cl">
+					<div class="title">
+						<h3>医用品信息管理<a id="tjyyp" href="#" class="button7 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
+					</div>
+
+			<!--筛选开始-->
+                <form action="/screening/medical" method="post">
+					<div class="form-wrap-5" id="divCompanyInfo">
+						<div class=" control-row">
+							<div class="control-label">
+								操作人
+							</div>
+							<div class="control-input control-text  relative1">
+								<input type="text" placeholder="操作人" name="user_id" class=" input-text input-text-long1 left-wrap input-company-name">
+							</div>
+							
+						</div>
+						<div class=" control-row">
+							<div class="control-label control-label-width">
+								医用品名称
+							</div>
+							<div class="control-input select-small control-text lh40 relative1 cl">
+								<input type="text" placeholder="医用品名称" name="name" class=" input-text input-text-long1 left-wrap input-company-name">
+							</div>
+						</div>
+						<div class=" control-row">
+							<div class="control-label">
+								医用品类型
+							</div>
+							<div class="control-input control-text  relative1">
+					            <select name="status" class="input-text input-text-long1 left-wrap">
+									<option value="">请选择</option>
+									<option value="一次性消耗用具">一次性消耗用具</option>
+									<option value="中小型器具">中小型器具</option>
+									<option value="药品">药品</option>
+								</select> 
+							</div>
+						</div>
+					</div>
+					<div align="center">
+						<input type="reset" class="button2 mb" value="重置"/>
+						<input type="submit" class="button green-button mb" value="查询"/>
+					</div>
+					
+                </form>
+                
+				<div class=" split-line mt mb"></div>
+                <!--筛选结束-->
+                <!--列表开始-->
+                <div class="table-list sz14">
+                    <table class="table-fixed" width="100%" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="align-center" width="60">医用品编号ID</th>
+                            <th class="align-center" width="90">医用品名称</th>
+                            <th class="align-center" width="60">操作人</th>
+                            <th class="align-center" width="100">创建时间</th>
+                            <th class="align-center" width="75" >医用品类型</th>
+                            <th class="align-center" width="100">创建时间</th>
+                            <th class="align-center" width="120">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="recordLists">
+						<tr th:each="MedicalInformation : ${meList}">
+                            <td class="align-center" th:text="${MedicalInformation.id}">111</td>
+                            <td class="align-center relative" th:text="${MedicalInformation.name}">
+                                <em class="fs1">针管</em>
+                            </td>
+                            <td class="align-center font-pro relative" th:text="${MedicalInformation.user_id}">
+                                <em class="fs4 sz14">216</em>
+                            </td>
+                            <td class="align-center font-pro relative" th:text="${MedicalInformation.status}">
+                                <em class="fs4 sz14">216.61</em>
+                            </td>
+                            <td class="align-centert" th:text="${#dates.format(MedicalInformation.create_time, 'yyyy-MM-dd')}"  >
+                                <em class="fs2 font-pro">2019-04-13</em>
+                            </td>
+                            <td class="align-center" th:text="${#dates.format(MedicalInformation.update_time, 'yyyy-MM-dd')}" >
+                                <em class="fs2 font-pro">2019-04-13</em>
+                            </td>
+                            <td class="align-center">
+                                <input  type="button" class="tjyyp1 button2 mb" th:onclick="'javascript:updateMed(\''+${MedicalInformation.id}+'\');'"  value="修改" />
+                                <!--th:onclick="'javascript:updateMed(\''+${MedicalInformation.id}+'\');'"-->
+								<a  class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deleteMedical/'+${MedicalInformation.id}}">删除</a>
+                            </td>
+
+                        </tr>
+
+					    </tbody>
+					</table>
+                </div>
+				        <!--列表结束-->
+				        <!--翻页开始-->
+                <!--<div class="pager" th:replace="base :: page_pager(${p.currentpage}, ${p.totalpage}, /screening/queryJump,/screening/queryNext/,/screening/queryEnd,/administrator/medicalsupplies})">-->
+                <!--</div>-->
+                    <div class=" split-line mt mb"></div>
+                    <div style="text-align:center;font-size: 15px">
+                        <label>第<span th:text="${p.currentpage}"></span>/<span th:text="${p.totalpage}"></span>页   共<span th:text="${p.totalrows}"></span>条</label>
+                        <a th:href="@{/administrator/medicalsupplies}" type="button" role=button class="button green-button mb">首页</a>
+                        <a th:if="${p.currentpage > 1}" th:href="@{'/screening/queryNext/'+${p.currentpage - 1}}"  type="button" role=button class="button green-button mb">上一页</a>
+                        <a th:if="${p.currentpage == 1}" class="button green-button mb">上一页</a>
+                        <a th:if="${p.currentpage != p.totalpage}" th:href="@{'/screening/queryNext/'+${p.currentpage + 1}}"  type="button" role=button class="button green-button mb">下一页</a>
+                        <a th:if="${p.currentpage == p.totalpage}"  type="button" class="button green-button mb">下一页</a>
+                        <a th:href="@{/screening/queryEnd}" type="button" role=button class="button green-button mb">尾页</a>
+
+                    <form action="/screening/queryJump" method="post" style="margin:0px;display:inline;">
+                        跳转到: <input type="text" style="width: 30px" name="Jumppage" />页
+                        <input type="submit" value="跳转" class="button green-button mb"/>
+                    </form>
+                    </div>
+				        <!--翻页结束-->
+
+					<!--右侧内容结束-->
+
+
+				</div>
+			</div>
+        </div>
+
+    <div th:include="common/footer" ></div>
+
+
+
+<div class="pop-wrap" id="pop-wrap4" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
+	<div class="pop-title">
+		<a href="javascript:void(0);" class="right-wrap" id="right-wrap4">
+			<i class="common-icon close-icon"></i>
+		</a>
+		<h3>管理医用品</h3>
+	</div>
+	<div class="pop-pay">
+		<form id="form1" action="/addorupdatemedical" method="post">
+            <input id="yid"  type="text" placeholder="医用品名称" name="id" value="" style="display:none">
+			<div class=" control-row">
+				<div class="control-label">
+					医用品名称：
+				</div>
+				<div class="control-input control-text  relative1">
+					<input id="yname" type="text" placeholder="医用品名称" name="name" class=" input-text input-text-long1 left-wrap input-company-name">
+				</div>
+				
+			</div>
+
+			<div class=" control-row">
+				<div class="control-label">
+					医用品类型：
+				</div>
+				<div class="control-input control-text  relative1">
+					<select name="status" class="input-text input-text-long1 left-wrap">
+						<option value="一次性消耗用具">一次性消耗用具</option>
+						<option value="中小型器具">中小型器具</option>
+						<option value="药品">药品</option>
+					</select>
+				</div>
+			</div>
+            <div class=" control-row">
+                <div class="control-label">
+                    操作人：
+                </div>
+                <div class="control-input control-text  relative1">
+                    <!--<label sec:authentication="name" name="user_id"></label>-->
+                    <input type="text" readonly="true" name="user_id" th:value="${#authentication.name}"  class=" input-text input-text-long1 left-wrap input-company-name">
+                </div>
+
+            </div>
+
+			<div align="center">
+				<input type="submit" class="button green-button mb" value="保存"/>
+			</div>
+            <!--<span th:text="${MedicalInformation}"></span>-->
+		</form>
+	</div>
+</div>
+<div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
+	</body>
+		<script type="text/javascript" th:src="@{/js/core.js}"></script>
+</html>

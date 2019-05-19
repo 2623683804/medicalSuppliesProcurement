@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<meta charset="UTF-8">
+		<title>海马管理员信息管理 - 海马官网</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="stylesheet" th:href="@{css/commonn.css}" />
+		<link rel="stylesheet" th:href="@{css/base.css}" />
+		<link rel="stylesheet" th:href="@{css/pop.css}" />
+		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{js/account.js}" ></script>
+
+	</head>
+
+	<body>
+		
+		<div class="wrap">
+			<!--内容开始-->
+			<div class="containermcompany">
+				<div class="width-wrap white-bg add-border cl">
+					<div class="title">
+						<h3>管理员信息管理<a id="glygl" href="#" class="button1 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
+						
+					</div>
+
+			<!--筛选开始-->
+                <form>
+					<div class="form-wrap-5" id="divCompanyInfo">
+						<div class=" control-row">
+				<div class="control-label">
+					管理员名称：
+				</div>
+				<div class="control-input control-text  relative1">
+					<input type="text" placeholder="管理员名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+				</div>
+				
+			</div>
+
+			<div class=" control-row">
+				<div class="control-label">
+					管理员类型：
+				</div>
+				<div class="control-input control-text  relative1">
+		            <select name="" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
+						<option value="0">请选择</option> 
+						<option value="1">采购管理员</option> 
+						<option value="2">采购审批管理员</option> 
+						<option value="3">医用品管理员</option> 
+					</select> 
+				</div>
+			</div>
+					</div>
+					<div align="center">
+						<input type="button" class="button2 mb" value="重置"/>
+					<input type="button" class="button green-button mb" value="查询"/>
+					</div>
+					
+                </form>
+                
+				<div class=" split-line mt mb"></div>
+                <!--筛选结束-->
+                <!--列表开始-->
+                <div class="table-list sz14">
+                    <table class="table-fixed" width="100%" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="align-center" width="60">管理员ID</th>
+                            <th class="align-center" width="90">管理员名称</th>
+                            <th class="align-center" width="60">密码</th>
+                            <th class="align-center" width="100">创建时间</th>
+                            <th class="align-center" width="75" >管理员类型</th>
+                            <th class="align-center" width="120">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="recordLists">
+    
+					    <tr class="drdc">
+					       
+					        
+					        <td class="align-center">111</td>
+					        <td class="align-center relative">
+					            <em class="fs1">周航</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs4 sz14">che001</em>
+					        </td>
+					        <td class="align-center">
+					        	<em class="fs2 font-pro">2019-04-13</em>
+					        </td>
+					        <td class="align-center">
+					        	<em class="fs2 font-pro">采购管理员</em>
+					        </td>
+					        <td class="align-center">
+					        	<input id="glyxg" type="button" class="button2 mb" value="修改" />
+					         	<input type="button" class="button mb" value="删除" />			            
+					            	
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+				        </div>
+				        <!--列表结束-->
+				        <!--翻页开始-->
+				        <div class="paging-box">
+				        	<div class="paging align-right sz14">
+				        		<a class="ky_pre_page" href="javascript:void(0);">
+				        			<i class="common-icon-New pre-icon"></i>
+				        		</a>
+				        	<a href="javascript:void(0);" class="a">1</a>
+				        	<a href="javascript:void(0);">2</a>
+				        	<a href="javascript:void(0);">3</a>
+				        	<a href="javascript:void(0);">4</a>
+				        	<a href="javascript:void(0);">5</a>
+				        	<span>...</span>
+				        	<a href="javascript:void(0);">8</a>
+				        	<a href="javascript:void(0);">9</a>
+				        	<a href="#" class="ky_next_page delmr">
+				        		<i class="common-icon-New pre-icon flipx"></i>
+				        	</a>
+				        	</div>
+				        </div>
+				        <!--翻页结束-->
+				    </div>
+					<!--右侧内容结束-->
+
+
+				</div>
+			</div>
+			
+<div class="pop-wrap" id="pop-wrap6" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
+	<div class="pop-title">
+		<a href="javascript:void(0);" class="right-wrap" id="right-wrap6">
+			<i class="common-icon close-icon"></i>
+		</a>
+		<h3>管理员管理</h3>
+	</div>
+	<div class="pop-pay">
+		<form>
+			<div class=" control-row">
+				<div class="control-label">
+					管理员名称：
+				</div>
+				<div class="control-input control-text  relative1">
+					<input type="text" placeholder="管理员名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+				</div>
+				
+			</div>
+			
+			<div class=" control-row">
+				<div class="control-label control-label-width">
+					管理员密码：
+				</div>
+				<div class="control-input select-small control-text lh40 relative1 cl">
+					<input type="text" placeholder="管理员密码" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+				</div>
+			</div>
+			<div class=" control-row">
+				<div class="control-label">
+					管理员类型：
+				</div>
+				<div class="control-input control-text  relative1">
+		            <select name="" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
+						<option value="0">请选择</option> 
+						<option value="1">采购管理员</option> 
+						<option value="2">采购审批管理员</option> 
+						<option value="3">医用品管理员</option> 
+					</select> 
+				</div>
+			</div>
+			<div align="center">
+				<input type="button" class="button green-button mb" value="保存"/>
+			</div>
+		</form>
+	</div>
+</div>
+<div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
+	</body>
+		<script type="text/javascript" th:src="@{js/core.js}"></script>
+</html>

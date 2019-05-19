@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>采购管理</title>
+		<link rel="stylesheet" href="../css/commonn.css" />
+		<script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
+		<script type="text/javascript" src="../js/tr.js" ></script>
+		<script type="text/javascript" src="../js/jQ.js" ></script>
+	</head>
+
+	<body>
+		<div id="container" class="">
+			<div class="width-wrap">
+				<div class="content cl">
+					<!--左侧导航开始-->
+					<div id="left-nav" class="left-wrap">
+						<!--左侧导航开始-->
+						<ul class="drdc">
+							<li>
+								<a href="account.html">账户总览</a>
+							</li>
+							<li class="left-nav-line"></li>
+							<li>
+								<a class="a" href="purchasingrecords.html">采购申请记录</a>
+							</li>
+							<li class="left-nav-line"></li>
+							<li>
+								<a  href="informationchanges.html">企业信息修改</a>
+							</li>
+							
+							<li class="left-nav-line"></li>
+							<li class="left-nav-line"></li>
+							<li class="left-nav-line"></li>
+						</ul>
+						<!--左侧导航结束-->
+					</div>
+					<!--左侧导航结束-->
+					<!--右侧内容开始-->
+					<div id="right-content" class="right-wrap  white-bg add-border">
+                <div class="title">
+                    <h3>采购申请记录 <span class="pl lh40 transaction-agreement"></span></h3>
+                </div>
+
+                <!--筛选开始-->
+               
+                <form>
+					<div class="form-wrap-5" id="divCompanyInfo">
+						<div class=" control-row">
+							<div class="control-label">
+								申请编号
+							</div>
+							<div class="control-input control-text  relative1">
+								<input type="text" placeholder="申请编号" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+							</div>
+							
+						</div>
+						<div class=" control-row">
+							<div class="control-label control-label-width">
+								医用耗材名称
+							</div>
+							<div class="control-input select-small control-text lh40 relative1 cl">
+								<input type="text" placeholder="医用耗材名称" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+							</div>
+						</div>
+						<div class=" control-row">
+							<div class="control-label">
+								状态
+							</div>
+							<div class="control-input control-text  relative1">
+								<!--<input type="text" list="sexlist" placeholder="状态" id="taxNo" name="taxNo" class="input-text input-text-long1 left-wrap">
+								 <datalist id="sexlist">
+					                <option>男</option>
+					                <option>女</option>
+					            </datalist>
+					            -->
+					            <select name="" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
+									<option value="0">草稿</option> 
+									<option value="1">已删除</option> 
+									<option value="2">待审批</option> 
+									<option value="3">审批通过</option> 
+									<option value="4">审批不通过</option> 
+								</select> 
+							</div>
+						</div>
+					</div>
+					<div align="center">
+						<input type="button" class="button2 mb" value="重置"/>
+					<input type="button" class="button green-button mb" value="查询"/>
+					</div>
+					
+                </form>
+                
+				<div class=" split-line mt mb"></div>
+                <!--筛选结束-->
+                <!--列表开始-->
+                <div class="table-list sz14">
+                    <table class="table-fixed" width="100%" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="align-center" width="60">申请编号</th>
+                            <th class="align-center" width="90">医用耗材名称</th>
+                            <th class="align-center" width="60">所需数量</th>
+                            <th class="align-center" width="40">报价</th>
+                            <th class="align-center" width="100">交付时间</th>
+                            <th class="align-center" width="75" >状态</th>
+                            <th class="align-center" width="100">创建时间</th>
+                            <th class="align-center" width="120">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="recordLists">
+    
+					    <tr class="drdc">
+					       
+					        
+					        <td class="align-center">111</td>
+					        <td class="align-center relative">
+					            <em class="fs1">针管</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs4 sz14">216</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs4 sz14">216.61</em>
+					        </td>
+					        <td class="align-centert">
+					        	<em class="fs2 font-pro">2019-04-13</em>
+					        </td>
+					        <td class="align-center">
+					         	<em class="fs1">草稿</em><!--0草稿  1已删除  2已提交（待审批）  3审批通过   3审批不通过-->
+					        </td>
+					        <td class="align-center">
+					        	<em class="fs2 font-pro">2019-04-13</em>
+					        </td>
+					        <td class="align-center">
+					        	<input type="button" class="button2 mb" value="修改" />
+					         	<input type="button" class="button mb" value="删除" />			            
+					            	
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+				        </div>
+				        <!--列表结束-->
+				        <!--翻页开始-->
+				        <div class="paging-box">
+				        	<div class="paging align-right sz14">
+				        		<a class="ky_pre_page" href="javascript:void(0);">
+				        			<i class="common-icon-New pre-icon"></i>
+				        		</a>
+				        	<a href="javascript:void(0);" class="a">1</a>
+				        	<a href="javascript:void(0);">2</a>
+				        	<a href="javascript:void(0);">3</a>
+				        	<a href="javascript:void(0);">4</a>
+				        	<a href="javascript:void(0);">5</a>
+				        	<span>...</span>
+				        	<a href="javascript:void(0);">8</a>
+				        	<a href="javascript:void(0);">9</a>
+				        	<a href="#" class="ky_next_page delmr">
+				        		<i class="common-icon-New pre-icon flipx"></i>
+				        	</a>
+				        	</div>
+				        </div>
+				        <!--翻页结束-->
+				    </div>
+					<!--右侧内容结束-->
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

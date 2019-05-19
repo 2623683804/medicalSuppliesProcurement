@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<meta charset="UTF-8">
+		<title>海马采购审批管理 - 海马官网</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+        <link rel="stylesheet" th:href="@{css/commonn.css}" />
+        <link rel="stylesheet" th:href="@{css/base.css}" />
+		<link rel="stylesheet" th:href="@{css/pop.css}" />
+		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
+
+	</head>
+
+	<body>
+    <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+        <div th:include="common/header_xt" ></div>
+    </div>
+
+    <div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
+        <div th:include="common/header_gys" ></div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_SPGLY')"> <!-- 用户类型为ROLE_SPGLY 显示 -->
+        <div th:include="common/header_sp" ></div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_CGGLY')"> <!-- 用户类型为ROLE_CGGLY 显示 -->
+        <div th:include="common/header_cx" ></div>
+    </div>
+    <div sec:authorize="hasRole('ROLE_YYPGLY')"> <!-- 用户类型为ROLE_YYPGLY 显示 -->
+        <div th:include="common/header_yyp" ></div>
+    </div>
+
+		<div class="wrap">
+			<!--内容开始-->
+			<div class="containermcompany">
+				<div class="width-wrap white-bg add-border cl">
+					<div class="title">
+						<h3>采购信息管理</h3>
+						
+					</div>
+
+			<!--筛选开始-->
+                <form>
+					<div class="form-wrap-5" id="divCompanyInfo">
+						<div class=" control-row">
+							<div class="control-label">
+								医用耗材名称
+							</div>
+							<div class="control-input control-text  relative1">
+								<input type="text" placeholder="医用耗材名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+							</div>
+							
+						</div>
+						
+					</div>
+					<div align="center">
+						<input type="button" class="button2 mb" value="重置"/>
+					<input type="button" class="button green-button mb" value="查询"/>
+					</div>
+					
+                </form>
+                
+				<div class=" split-line mt mb"></div>
+                <!--筛选结束-->
+                <!--列表开始-->
+                <div class="table-list sz14">
+                    <table class="table-fixed" width="100%" cellspacing="0" cellpadding="0">
+                        <thead>
+                        <tr>
+                            <th class="align-center" width="90">医用耗材名称</th>
+                            <th class="align-center" width="50">状态</th>
+                            <th class="align-center" width="60">发布价格</th>
+                            <th class="align-center" width="60" >采购数量</th>
+                            <th class="align-center" width="75">供应商报价</th>
+                            <th class="align-center" width="100">交付时间</th>
+                            <th class="align-center" width="120">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody class="recordLists">
+    
+					    <tr class="drdc">
+					       
+					        
+					        <td class="align-center relative">
+					            <em class="fs1">针管</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs2 font-pro">待审批</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs4 sz14">400</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					            <em class="fs4 sz14">400</em>
+					        </td>
+					        <td class="align-center font-pro relative">
+					        	<em class="fs4 sz14">400</em>
+					        </td>
+					        <td class="align-center">
+					        	<em class="fs2 font-pro">2015-11-03</em>
+					        </td>
+					        <td class="align-center">
+					        	<input id="" type="button" class="button2 mb" value="审批通过" />
+					         	<input type="button" class="button mb" value="审批不通过" />			            
+					            	
+					        </td>
+					    </tr>
+					    </tbody>
+					</table>
+				        </div>
+				        <!--列表结束-->
+				        <!--翻页开始-->
+				        <div class="paging-box">
+				        	<div class="paging align-right sz14">
+				        		<a class="ky_pre_page" href="javascript:void(0);">
+				        			<i class="common-icon-New pre-icon"></i>
+				        		</a>
+				        	<a href="javascript:void(0);" class="a">1</a>
+				        	<a href="javascript:void(0);">2</a>
+				        	<a href="javascript:void(0);">3</a>
+				        	<a href="javascript:void(0);">4</a>
+				        	<a href="javascript:void(0);">5</a>
+				        	<span>...</span>
+				        	<a href="javascript:void(0);">8</a>
+				        	<a href="javascript:void(0);">9</a>
+				        	<a href="#" class="ky_next_page delmr">
+				        		<i class="common-icon-New pre-icon flipx"></i>
+				        	</a>
+				        	</div>
+				        </div>
+				        <!--翻页结束-->
+				    </div>
+					<!--右侧内容结束-->
+
+
+				</div>
+			</div>
+			
+	</body>
+		<script type="text/javascript" th:src="@{js/core.js}"></script>
+</html>

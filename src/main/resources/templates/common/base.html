@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--
+    number 页码。页码从1开始，如：1，2，3，4，5，...
+    offset 页码偏移量。如果页码是从0开始，则偏移量为-1；如果页码从1开始，偏移量为0
+    totalPages 分页后，页的总数量。
+    url URL地址。形如：/c , /c?id=1, /c/b?id=1&limit=10。
+
+    1,会自动向url中添加页码，如：/c?id=1&page=1, /c/b?id=1&limit=10&page=1
+    2,当超过totalPages>maxButtons时，会显示...代替多余的按钮
+    3,maxButtons>=floatButtons*2
+     -->
+<div class="pager layui-clear" th:fragment="page_pager(p.currentpage, p.totalpage, totalPages, url)"
+     th:with="maxButtons=10,floatButtons=5" style="text-align:center;font-size: 15px">
+
+        <label>第<span th:text="${p.currentpage}"></span>/<span th:text="${p.totalpage}"></span>页   共<span th:text="${p.totalrows}"></span>条</label>
+        <a th:href="@{/administrator/medicalsupplies}" type="button" role=button class="button green-button mb">首页</a>
+        <a th:if="${p.currentpage > 1}" th:href="@{'/screening/queryNext/'+${p.currentpage - 1}}"  type="button" role=button class="button green-button mb">上一页</a>
+        <a th:if="${p.currentpage == 1}" class="button green-button mb">上一页</a>
+        <a th:if="${p.currentpage != p.totalpage}" th:href="@{'/screening/queryNext/'+${p.currentpage + 1}}"  type="button" role=button class="button green-button mb">下一页</a>
+        <a th:if="${p.currentpage == p.totalpage}"   type="button" class="button green-button mb">下一页</a>
+        <a th:href="@{/screening/queryEnd}" type="button" role=button class="button green-button mb">尾页</a>
+
+        <form action="/screening/queryJump" method="post" style="margin:0px;display:inline;">
+            跳转到: <input type="text" style="width: 30px" name="Jumppage" />页
+            <input type="submit" value="跳转" class="button green-button mb"/>
+        </form>
+</div>
+
+</body>
+</html>

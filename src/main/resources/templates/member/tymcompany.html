@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<head>
+		<meta charset="UTF-8">
+		<title>海马账号企业实名认证 - 海马官网</title>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+		<link th:href="@{/css/commonn.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/reg.css}" rel="stylesheet" type="text/css">
+		<link th:href="@{/css/select.css}"  rel="stylesheet" type="text/css">
+		<link rel="stylesheet" th:href="@{css/base.css}" />
+		<link rel="stylesheet" th:href="@{css/pop.css}" />
+		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
+
+	</head>
+
+	<body>
+
+		<div th:include="common/header_gys" ></div>
+
+		
+
+		<div class="wrap">
+			<!--内容开始-->
+			<div class="containermcompany">
+				<div class="width-wrap white-bg add-border cl">
+					<div class="title">
+						<h3>企业实名认证</h3>
+					</div>
+
+					<form id="formCompany"  method="post" th:action="@{/}" autocomplete="off" novalidate="novalidate">
+						<div class="no-data hide">
+							<div class="loader">
+								<div class="loader-inner line-scale-pulse-out">
+
+								</div>
+							</div>
+						</div>
+						<div class="enterprise-real">
+							<div class="form-wrap-1 mt delpb">
+								<div id="selectUserType" class="control-row">
+									<div class="control-label mt pt">
+										开户类型
+									</div>
+									<div class="control-input control-text  relative">
+										<a th:href="@{/member/tymcompany.html}" class="account-type on alipay-icon">
+											<h3>统一社会信用代码注册</h3>
+											<p>18位的营业执照号</p>
+										</a>
+										<a th:href="@{/member/zchmcompany.html}"  class="account-type ml5">
+											<h3>注册号注册</h3>
+											<p>15位注册号</p>
+										</a>
+										<div class="note-default left-wrap relative">
+											<span>请按照您的实际情况选择认证类型，一旦开户成功，不可修改</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="real-title">基础信息</div>
+							<div class="form-wrap-1" id="divCompanyInfo">
+								<div class=" control-row">
+									<div class="control-label">
+										企业名称
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="企业名称" name="companyName" class=" input-text input-text-long left-wrap input-company-name">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label control-label-width">
+										营业执照
+									</div>
+									<div class="control-input select-small control-text lh40 relative cl">
+										<input type="text" placeholder="统一社会信用代码" name="companyId" class=" input-text input-text-long left-wrap input-company-name">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										组织机构代码
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="组织机构代码" id="orgNo" name="orgNo" class="input-text input-text-long left-wrap">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										税务登记号
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="税务登记号" id="taxNo" name="taxNo" class="input-text input-text-long left-wrap">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										开户许可证核准号
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="开户许可证核准号" name="bankLicense" class=" input-text input-text-long left-wrap">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										法人名称
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="法人名称" name="legalName" class=" input-text input-text-long left-wrap input-name" maxlength="16">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										法人身份证号
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="法人身份证号" name="legalCode" class=" input-text input-text-long left-wrap input-id" maxlength="18">
+										<div class="expand font-pro hide"></div>
+									</div>
+									<div class="div-bank-card-large-tip"></div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										企业联系人
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="企业联系人" name="contactName" class=" input-text input-text-long left-wrap" maxlength="16">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label control-label-width">
+										联系人手机号
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="联系手机号" name="contactTelNum" class=" input-text input-text-long left-wrap" maxlength="18">
+									</div>
+								</div>
+							</div>
+							<div class="real-title">对公账户信息
+							</div>
+							<div class="form-wrap-1 ">
+								<div class=" control-row relative">
+									<div class="control-label">
+										开户行
+									</div>
+									<div class="control-input control-text cl">
+										<input type="text" placeholder="开户行" name="bankName" class=" relative input-text input-text-long left-wrap input-select-bank">
+									</div>
+								</div>
+								<div class=" control-row">
+									<div class="control-label">
+										银行对公账号
+									</div>
+									<div class="control-input control-text  relative">
+										<input type="text" placeholder="银行对公账号" name="bankCard" class=" input-text input-text-long left-wrap bank-card" maxlength="25">
+										<div class="expand font-pro hide"></div>
+									</div>
+									<div class="div-bank-card-large-tip"></div>
+								</div>
+							</div>
+							
+							<div class="form-wrap-1">
+								<div class="control-row cl">
+									<div class=" control-input control-text drdc">
+										<input id="btnSubmit" type="submit" class="button button_h46" value="立即开通">
+
+									</div>
+								</div>
+								<div class="control-row cl">
+									<div id="formError" class="fs4 sz14 pl20 ml5 hide"></div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" th:src="@{js/core.js}" ></script>
+</html>

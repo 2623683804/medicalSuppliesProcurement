@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" th:href="@{/css/commonn.css}" />
+		<link rel="stylesheet"  th:href="@{/css/base.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+	</head>
+
+	<body>
+		<div class="head-wrap">
+			<div id="head" class="head head-bgcolor shadow">
+				<!--top-header开始-->
+				<div id="top-header" class="top-head cl">
+					<div class="width-wrap">
+						<a href="#">
+							<h1 class="logo">海马</h1>
+						</a>
+						<ul class="cl">
+							<div sec:authorize="isAuthenticated()">
+                                <li t="l">您好，
+                                    <a href="#" sec:authentication="name"></a>
+
+                                    <form id="loginForm" th:action="@{/logout}" method="post" style="margin:0px;display:inline;">
+                                        <!--<input type="submit"  value="[退出]"/>-->
+                                        <a onclick="document:loginForm.submit()">[退出]</a>
+                                    </form>
+                                </li>
+
+
+							<span></span>
+							<li class="delpr" >400-100-8899 (08:00-20:00)</li>
+							</div>
+						</ul>
+					</div>
+				</div>
+				<!--top-header结束-->
+				<!--nav开始-->
+				<div id="header">
+					<div class="headerLine"></div>
+					<div class="width-wrap head-nav cl">
+						<ul class="cl ful">
+							<li class="delpl">
+								<a class="actived pointer" th:href="@{/index}">首页 </a>
+							</li>
+							<li>
+								<a id="snlc" th:href="@{/milestone}" class="pointer">公司介绍</a>
+							</li>
+							<li>
+								<a id="wytz1" th:href="@{/administrator/approval}" class="pointer">采购审批管理</a>
+							</li>
+							<li>
+								<a id="loan_a1" th:href="@{/administrator/procurement}" class="pointer">采购信息管理</a>
+							</li>
+							<li>
+								<a id="appxz1" th:href="@{/administrator/medicalsupplies}"  class="pointer">医用品信息管理</a>
+							</li>
+							<li>
+								<a id="hgyy" href="javascript:void(0);">系统管理</a>
+                                <!--class="active"-->
+							</li>
+						</ul>
+                        <div sec:authorize="hasRole('ROLE_USER')">
+                            <div class="lastChild">
+                                <a id="myaccount" th:href="@{/member/login}" rel="nofollow"><i class="common-icon-New people-icon"></i>我的账户</a>
+                            </div>
+                        </div>
+					</div>
+					<div id="sheader" class="width-wrap head-subNav cl" style="height: 0px; display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
+
+						<ul class="hide" s_h="hgyy">
+							<li>
+								<a th:href="@{/administrator/gldministrator}"><i class="common-icon-New company-icon"></i>角色管理</a>
+							</li>
+							<li>
+								<a th:href="@{/administrator/supplier}"><i class="common-icon-New deposit-icon"></i>供应商信息管理</a>
+							</li>
+							
+						</ul>
+					</div>
+
+				</div>
+
+				<!--nav结束-->
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" th:src="@{js/core.js}" ></script>
+</html>
