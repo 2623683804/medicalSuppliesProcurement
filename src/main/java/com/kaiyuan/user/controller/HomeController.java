@@ -11,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -41,6 +44,11 @@ public class HomeController {
     public  String login(){
         return "member/login";
     }
+    @RequestMapping("/member/login")
+    public  String memberlogin(){
+        return "member/login";
+    }
+
 
     @RequestMapping("/applyfor")
     public String applyfor(){
@@ -55,6 +63,20 @@ public class HomeController {
     @RequestMapping("/member/register")
     public String register(){
         return "member/register";
+    }
+
+    @GetMapping("/member/tymcompany/{username}")
+    public String tymcompany(Model model, @PathVariable("username") String username){
+        logger.info("/member/tymcompany/{username}");
+        model.addAttribute("username",username);
+        return "member/tymcompany";
+    }
+
+    @GetMapping("/member/zchcompany/{username}")
+    public String zchcompany(Model model, @PathVariable("username") String username){
+        logger.info("/member/zchcompany/{username}");
+        model.addAttribute("username",username);
+        return "member/zchcompany";
     }
 
     @RequestMapping("/administrator/approval")
@@ -80,9 +102,27 @@ public class HomeController {
         return "administrator/supplier";
     }
 
+    @RequestMapping("/usermanagement/account")
+    public String account(){
+        String name = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        return "usermanagement/account";
+    }
+
     @RequestMapping("/usermanagement/purchasingrecords")
     public String purchasingrecords(){
-        return "purchasingrecords";
+        return "usermanagement/purchasingrecords";
+    }
+
+    @RequestMapping("/usermanagement/informationchanges")
+    public String informationchanges(){
+        return "usermanagement/informationchanges";
+    }
+
+    @RequestMapping("/usermanagement/resetpassword")
+    public String resetpassword(){
+        return "usermanagement/resetpassword";
     }
 
 }

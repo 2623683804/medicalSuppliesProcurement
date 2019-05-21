@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html  xmlns:th="http://www.thymeleaf.org"
+	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
 		<meta charset="UTF-8">
 		<title>账户总览</title>
-		<link rel="stylesheet" href="../css/commonn.css" />
-		<link rel="stylesheet" href="../css/pop.css" />
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
-		<script type="text/javascript" src="../js/account.js" ></script>
+        <link rel="stylesheet" th:href="@{/css/commonn.css}" />
+        <link rel="stylesheet" th:href="@{/css/base.css}" />
+		<link rel="stylesheet" th:href="@{/css/pop.css}" />
+        <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{js/account.js}" ></script>
 	</head>
 
 	<body>
+	<div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
+		<div th:include="common/header_gys" ></div>
+	</div>
 		<div id="container" class="">
 			<div class="width-wrap">
 				<div class="content cl">
@@ -205,5 +210,5 @@
 
 <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 	</body>
-
+    <script type="text/javascript" th:src="@{js/core.js}" ></script>
 </html>

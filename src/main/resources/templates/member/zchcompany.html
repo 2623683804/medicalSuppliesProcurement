@@ -25,7 +25,7 @@
 					<h3>企业实名认证</h3>
 				</div>
 				
-				<form id="formCompany" autocomplete="off" novalidate="novalidate" method="post" th:action="@{/}">
+				<form id="formCompany" autocomplete="off" novalidate="novalidate" method="post" action="/addGysUserTwo">
 					<div class="no-data hide">
 						<div class="loader">
 							<div class="loader-inner line-scale-pulse-out">
@@ -40,11 +40,11 @@
 									开户类型
 								</div>
 								<div class="control-input control-text  relative">
-									<a th:href="@{/member/tymcompany.html}" class="account-type ml5">
+									<a th:href="@{'/member/tymcompany/'+${username}}" class="account-type ml5">
 										<h3>统一社会信用代码注册</h3>
 										<p>18位的营业执照号</p>
 									</a>
-									<a th:href="@{/member/zchmcompany.html}" class="account-type on alipay-icon">
+									<a th:href="@{'/member/zchcompany/'+${username}}" class="account-type on alipay-icon">
 										<h3>注册号注册</h3>
 										<p>15位注册号</p>
 									</a>
@@ -56,6 +56,7 @@
 						</div>
 						<div class="real-title">基础信息</div>
 						<div class="form-wrap-1" id="divCompanyInfo">
+                            <input type="hidden" name="username"  th:value="${username}"/>
 							<div class=" control-row">
 								<div class="control-label">
 									企业名称
@@ -64,28 +65,21 @@
 									<input type="text" placeholder="企业名称" name="companyName" class=" input-text input-text-long left-wrap input-company-name">
 								</div>
 							</div>
+
 							<div class=" control-row">
-								<div class="control-label control-label-width">
-									营业执照
-								</div>
-								<div class="control-input select-small control-text lh40 relative cl">
-									<input type="text" placeholder="统一社会信用代码" name="companyId" class=" input-text input-text-long left-wrap input-company-name">
-								</div>
-							</div>
-							<div class=" control-row hide">
 								<div class="control-label">
 									组织机构代码
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="组织机构代码" id="orgNo" name="orgNo" class="input-text input-text-long left-wrap">
+									<input type="text" placeholder="组织机构代码" id="orgNo" name="zzjgNumber" class="input-text input-text-long left-wrap">
 								</div>
 							</div>
-							<div class=" control-row hide">
+							<div class=" control-row">
 								<div class="control-label">
 									税务登记号
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="税务登记号" id="taxNo" name="taxNo" class="input-text input-text-long left-wrap">
+									<input type="text" placeholder="税务登记号" id="taxNo" name="tax_number" class="input-text input-text-long left-wrap">
 								</div>
 							</div>
 							<div class=" control-row">
@@ -93,7 +87,7 @@
 									开户许可证核准号
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="开户许可证核准号" name="bankLicense" class=" input-text input-text-long left-wrap">
+									<input type="text" placeholder="开户许可证核准号" name="account_number" class=" input-text input-text-long left-wrap">
 								</div>
 							</div>
 							<div class=" control-row">
@@ -101,7 +95,7 @@
 									法人名称
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="法人名称" name="legalName" class=" input-text input-text-long left-wrap input-name" maxlength="16">
+									<input type="text" placeholder="法人名称" name="legal_name" class=" input-text input-text-long left-wrap input-name" maxlength="16">
 								</div>
 							</div>
 							<div class=" control-row">
@@ -109,7 +103,7 @@
 									法人身份证号
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="法人身份证号" name="legalCode" class=" input-text input-text-long left-wrap input-id" maxlength="18">
+									<input type="text" placeholder="法人身份证号" name="legal_number" class=" input-text input-text-long left-wrap input-id" maxlength="18">
 									<div class="expand font-pro hide"></div>
 								</div>
 								<div class="div-bank-card-large-tip"></div>
@@ -119,7 +113,7 @@
 									企业联系人
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="企业联系人" name="contactName" class=" input-text input-text-long left-wrap" maxlength="16">
+									<input type="text" placeholder="企业联系人" name="business_contact" class=" input-text input-text-long left-wrap" maxlength="16">
 								</div>
 							</div>
 							<div class=" control-row">
@@ -127,7 +121,15 @@
 									联系人手机号
 								</div>
 								<div class="control-input control-text  relative">
-									<input type="text" placeholder="联系手机号" name="contactTelNum" class=" input-text input-text-long left-wrap" maxlength="18">
+									<input type="text" placeholder="联系手机号" name="bu_contact_phone" class=" input-text input-text-long left-wrap" maxlength="18">
+								</div>
+							</div>
+							<div class=" control-row">
+								<div class="control-label control-label-width">
+									详细地址
+								</div>
+								<div class="control-input control-text  relative">
+									<input type="text" placeholder="详细地址" name="address" class=" input-text input-text-long left-wrap" maxlength="18">
 								</div>
 							</div>
 						</div>
@@ -139,7 +141,7 @@
 										开户行
 									</div>
 									<div class="control-input control-text cl">
-										<input type="text" placeholder="开户行" name="bankName" class=" relative input-text input-text-long left-wrap input-select-bank">
+										<input type="text" placeholder="开户行" name="bank" class=" relative input-text input-text-long left-wrap input-select-bank">
 									</div>
 								</div>
 								<div class=" control-row">
@@ -147,7 +149,7 @@
 										银行对公账号
 									</div>
 									<div class="control-input control-text  relative">
-										<input type="text" placeholder="银行对公账号" name="bankCard" class=" input-text input-text-long left-wrap bank-card" maxlength="25">
+										<input type="text" placeholder="银行对公账号" name="bank_number" class=" input-text input-text-long left-wrap bank-card" maxlength="25">
 										<div class="expand font-pro hide"></div>
 									</div>
 									<div class="div-bank-card-large-tip"></div>

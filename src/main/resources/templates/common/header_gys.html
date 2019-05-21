@@ -31,16 +31,18 @@
 										<a onclick="document:loginForm.submit()">[退出]</a>
 									</form>
 								</li>
-
+								<span></span>
+								<li class="delpr">400-100-8899 (08:00-20:00)</li>
                             </div>
                                 <!--匿名-->
-
-                                    <li t="l"  sec:authorize="isAnonymous()">
-                                        <a class="pr" th:href="@{/login}">登录</a>
-                                        <a th:href="@{/member/register}">注册</a>
-                                    </li>
+							<div sec:authorize="isAnonymous()">
+								<li t="l"  >
+									<a class="pr" th:href="@{/login}">登录</a>
+									<a th:href="@{/member/register}">注册</a>
+								</li>
 								<span></span>
-								<li class="delpr" >400-100-8899 (08:00-20:00)</li>
+								<li class="delpr">400-100-8899 (08:00-20:00)</li>
+							</div>
 						</ul>
 					</div>
 				</div>
@@ -60,7 +62,7 @@
 								<a id="snlc" th:href="@{/milestone}" class="pointer">公司介绍</a>
 							</li>
 						</ul>
-                        <div sec:authorize="isAnonymous()">
+                        <div sec:authorize="isAuthenticated()">
                             <div class="lastChild">
                                 <a id="myaccount" th:href="@{/usermanagement/account}" rel="nofollow"><i class="common-icon-New people-icon"></i>我的账户</a>
                             </div>

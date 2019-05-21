@@ -4,7 +4,7 @@
 <mapper namespace="com.kaiyuan.management.dao.MedicalInformationMapper">
 
 
-    <select id="QueryNumber" resultType="java.lang.Integer">
+    <select id="queryCount" resultType="java.lang.Integer">
         select count(id)
         from medical_information
         where  1=1
@@ -25,14 +25,6 @@
         </if>
     </select>
 
-    <!--<select id="findQueryl"   resultType="java.lang.Integer">-->
-    <!--select count(id)-->
-    <!--from medical_information-->
-
-    <!--</select>-->
-    <!--<select id="queryfyList" resultType="com.kaiyuan.management.entity.MedicalInformation">-->
-		<!--select * from medical_information limit #{startrow} , #{pagesize}-->
-	<!--</select>-->
 
 
     <insert id="addMedicalInformation">

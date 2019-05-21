@@ -21,43 +21,45 @@
         where username= #{username}
     </select>
 
+    <select id="findByUserId"  resultType="com.kaiyuan.user.entity.SysUser">
+        select *
+        from Sys_User
+        where username= #{username}
+    </select>
 
-    <!--<resultMap id="userall" type="com.kaiyuan.user.entity.User"></resultMap>-->
+    <insert id="addGysUserOne" parameterType="com.kaiyuan.user.entity.SysUser">
+		insert into sys_user
+		(username,password,status)
+		values
+		(#{username},#{password},1)
+	</insert>
 
-    <!--<select id="getUserByUsername" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
- 		 <!--SELECT  *-->
- 		 <!--FROM s_user-->
- 		 <!--WHERE username = #{username}-->
- 	 <!--</select>-->
+    <insert id="addRole" parameterType="com.kaiyuan.user.entity.SysUser">
+		insert into sys_role_user
+		(Sys_User_id,Sys_Role_id)
+		values
+		(#{Sys_User_id},2)
+	</insert>
 
-    <!--<select id="selectUserbyuserName" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
-        <!--&lt;!&ndash;根据用户名称查询用户信息&ndash;&gt;-->
-        <!--SELECT id,name,age FROM t_user where name=#{userName}-->
-    <!--</select>-->
+    <insert id="addGysUserTwo"   parameterType="com.kaiyuan.user.entity.SupplieDetails">
+		insert into supplie_details
+		(companyName,zzjgNumber,tyshNumber,tax_number,account_number,legal_name,legal_number,business_contact,bu_contact_phone,bank,bank_number,address)
+		values
+		(#{companyName},#{zzjgNumber},#{tyshNumber},#{tax_number},#{account_number},#{legal_name},#{legal_number},#{business_contact},#{bu_contact_phone},#{bank},#{bank_number},#{address})
+	</insert>
 
-    <!--<select id="selectUserbyid" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
-        <!--&lt;!&ndash;根据用户ID查询用户信息&ndash;&gt;-->
-        <!--SELECT id,name,age FROM t_user where id=#{userId}-->
-    <!--</select>-->
+    <select id="queryGlyid" resultType="com.kaiyuan.user.entity.SupplieDetails">
+        select * from supplie_details where companyName=#{companyName}
+    </select>
 
-    <!--<select id="selectUseruserAge" resultType="com.kaiyuan.user.entity.User" resultMap="userall">-->
-        <!--&lt;!&ndash;根据用户age查询用户信息&ndash;&gt;-->
-        <!--SELECT id,name,age FROM t_user where age = #{userAge}-->
-    <!--</select>-->
-
-
-    <!--<insert id="insertUser">-->
-		<!--insert into t_user(id,name,age) values (#{id},#{name},#{age})-->
-	<!--</insert>-->
+    <update id="updateGysUserSt">
+        update sys_user set
+        gysid=#{gysid},
+        status=2
+        where username=#{username}
+    </update>
 
 
-    <!--<update id="updateUser">-->
-		<!--update t_user set name=#{name},age=#{age} where id=#{id}-->
-	<!--</update>-->
-
-    <!--<delete id="deleteUser" parameterType="Integer">-->
-     	<!--delete from t_user where id= #{id}-->
-	<!--</delete>-->
 
 
 </mapper>
