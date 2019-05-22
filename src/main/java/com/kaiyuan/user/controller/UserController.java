@@ -5,6 +5,7 @@ import com.kaiyuan.user.service.UserService;
 import com.kaiyuan.user.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,4 +42,65 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/usermanagement/account")
+    public String account(Model model){
+        String name = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        SupplieDetails supplieDetails= userService.queryGysAll(name);
+        model.addAttribute("supplieDetails",supplieDetails);
+        return "usermanagement/account";
+    }
+
+    @RequestMapping("/updateSupplieDetails")
+    public String updateSupplieDetails(Model model,SupplieDetails supplieDetails){
+        String name = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        logger.info(supplieDetails.toString());
+        if (userService.updateSupplieDetails(supplieDetails,name)){
+            model.addAttribute("msg","修改失败");
+            return "redirect:usermanagement/account";
+        }
+
+        model.addAttribute("supplieDetails",supplieDetails);
+        return "redirect:usermanagement/account";
+    }
+
+    @RequestMapping("/usermanagement/informationchanges")
+    public String informationchanges(Model model){
+        String name = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        SupplieDetails supplieDetails= userService.queryGysAll(name);
+        model.addAttribute("supplieDetails",supplieDetails);
+        return "usermanagement/informationchanges";
+    }
+
+    @RequestMapping("/usermanagement/resetpassword")
+    public String resetpassword(){
+        return "usermanagement/resetpassword";
+    }
+
+
+    @RequestMapping("/updatePassword")
+    public String updatePassword(Model model,String username,String bu_contact_phone,String password,String phoneCode){
+
+        if ("0000".equals(phoneCode)){
+            if ( userService.updatePassword(username,password)){
+                //model.addAttribute("supplieDetails",supplieDetails);
+                return "redirect:/logout";
+            }else {
+                model.addAttribute("username",username);
+                model.addAttribute("bu_contact_phone",bu_contact_phone);
+                return "usermanagement/resetpassword";
+            }
+
+        }else {
+            model.addAttribute("username",username);
+            model.addAttribute("bu_contact_phone",bu_contact_phone);
+            return "usermanagement/resetpassword";
+        }
+
+    }
 }

@@ -37,4 +37,20 @@ public class UserService implements UserServiceImpl{
 
     }
 
+    @Override
+    public SupplieDetails queryGysAll(String username){
+
+        return userMapper.queryGysAll(username);
+    }
+
+    @Override
+    public boolean updateSupplieDetails(SupplieDetails supplieDetails, String username){
+        return userMapper.updateSupplieDetails(supplieDetails,username)==1;
+    }
+
+    @Override
+    public boolean updatePassword(String username,String password){
+        return userMapper.updatePassword(username,password)==1;
+    }
+
 }

@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
 		<meta charset="UTF-8">
 		<title>企业信息修改</title>
-		<link rel="stylesheet" href="../css/commonn.css" />
-		<link rel="stylesheet" href="../css/pop.css" />
-		<script type="text/javascript" src="../js/jquery-3.2.1.min.js" ></script>
-		<script type="text/javascript" src="../js/account.js" ></script>
+		<link rel="stylesheet" th:href="@{/css/commonn.css}" />
+		<link rel="stylesheet" th:href="@{/css/pop.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
+        <script>
+            var value=document.getElementById("nameuser").value;
+            document.getElementById("name2").value=value;
+        </script>
 	</head>
 
 	<body>
-		<div id="container" class="">
+		<div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
+			<div th:include="common/header_gys" ></div>
+		</div>
+		<div id="container" class="containermcompany">
 			<div class="width-wrap">
 				<div class="content cl">
 					<!--左侧导航开始-->
@@ -46,7 +54,7 @@
 								<ul class="accounr-list">
 									<li id="realNameContainer" class="cl add">
 										<i class="account-icon real-icon aq-icon add-real-icon-hover"></i>
-										<span class="aq">用户名</span>
+										<span class="aq">用户基本信息</span>
 										<span class="aq1">申请采购前必须进行实名认证，账户更安全</span>
 										<span class="aq2 relative">
 										<a id="releaseYongHuBtn" href="#" class="sz14 fs5  pl20 mr">用户基本信息管理</a>
@@ -58,7 +66,7 @@
 										<span class="aq">手机号码</span>
 										<span class="aq1">企业联系人手机号码,用于重置登录密码</span>
 										<span class="aq2">
-	                                    <em id="telNum" class="fs2 font-pro">130****3913</em>
+	                                    <em id="telNum" class="fs2 font-pro"><span th:text="${supplieDetails.bu_contact_phone}"></span></em>
 	                                </span>
 									</li>
 									<li id="loginPwdContainer" class="cl add">
@@ -66,7 +74,7 @@
 										<span class="aq">登录密码</span>
 										<span class="sz14 fs2 aq1">安全性高的密码可以使账号更安全，建议您定期更换密码</span>
 										<span class="aq2  relative">
-	                                    <a href="../usermanagement/resetpassword.html"  class="sz14 fs5 pl20">重置</a>
+	                                    <a th:href="@{/usermanagement/resetpassword}"  class="sz14 fs5 pl20">重置</a>
 	                                </span>
 									</li>
 									<li id="bankCardContainer" class="cl add">
@@ -74,7 +82,7 @@
 										<span class="aq">银行卡</span>
 										<span class="aq1">用于体现银行对公信息</span>
 										<span class="aq2 relative">
-											<span class="fs2">招商银行 尾号** <em class="font-pro">8775</em></span>
+											<span class="fs2"><span th:text="${supplieDetails.bank}"></span> <span th:text="${supplieDetails.bank_number}"></span></span>
 										<span class="pipe">|</span>
 										<a id="releaseBankCardBtn" href="javascript:void(0)" class="sz14 fs5  pl20 mr">管理对公银行卡信息</a>
 										</span>
@@ -89,7 +97,7 @@
 			</div>
 		</div>
 
-
+        <div th:include="common/footer" ></div>
 
 <div class="pop-wrap" id="pop-wrap2" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
 	<div class="pop-title">
@@ -99,22 +107,13 @@
 		<h3>用户基本信息修改</h3>
 	</div>
 	<div class="pop-pay">
-		<form>
-			<div class=" control-row">
-				<div class="control-label">
-					用户名：
-				</div>
-				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="用户名" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
-				</div>
-				
-			</div>
+		<form action="/updateSupplieDetails" method="post">
 			<div class=" control-row">
 				<div class="control-label control-label-width">
 					供应商名称：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="供应商名称" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.companyName}"  type="text" placeholder="供应商名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div class=" control-row">
@@ -122,11 +121,11 @@
 					详细地址：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="详细地址" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.address}" type="text" placeholder="详细地址" name="address" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div align="center">
-				<input type="button" class="button green-button mb" value="保存"/>
+				<input type="submit" class="button green-button mb" value="保存"/>
 			</div>
 		</form>
 	</div>
@@ -140,13 +139,13 @@
 		<h3>对公银行卡信息管理</h3>
 	</div>
 	<div class="pop-pay">
-		<form>
+		<form  action="/updateSupplieDetails" method="post">
 			<div class=" control-row">
 				<div class="control-label">
 					开户行：
 				</div>
 				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="开户行" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.bank}" type="text" placeholder="开户行" name="bank" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 				
 			</div>
@@ -155,11 +154,11 @@
 					银行对公账号：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="银行对公账号" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.bank_number}" type="text" placeholder="银行对公账号" name="bank_number" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div align="center">
-				<input type="button" class="button green-button mb" value="保存"/>
+				<input type="submit" class="button green-button mb" value="保存"/>
 			</div>
 		</form>
 	</div>
@@ -167,5 +166,5 @@
 
 <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 	</body>
-
+	<script type="text/javascript" th:src="@{/js/core.js}" ></script>
 </html>

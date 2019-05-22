@@ -59,7 +59,56 @@
         where username=#{username}
     </update>
 
+    <select id="queryGysAll"  resultType="com.kaiyuan.user.entity.SupplieDetails">
+        select * from supplie_details where gysid=(select gysid from sys_user where username=#{username})
+    </select>
 
+    <update id="updateSupplieDetails">
+        UPDATE supplie_details
+        <set>
+            <if test="sup.companyName!=null and sup.companyName!='' ">
+                companyName = #{sup.companyName},
+            </if>
+            <if test="sup.zzjgNumber!=null and sup.zzjgNumber!='' ">
+                zzjgNumber = #{sup.zzjgNumber},
+            </if>
+            <if test="sup.tyshNumber!=null and sup.tyshNumber!='' ">
+                tyshNumber = #{sup.tyshNumber},
+            </if>
+            <if test="sup.tax_number!=null and sup.tax_number!='' ">
+                tax_number = #{sup.tax_number},
+            </if>
+            <if test="sup.account_number!=null and sup.account_number!='' ">
+                account_number = #{sup.account_number},
+            </if>
+            <if test="sup.legal_name!=null and sup.legal_name!='' ">
+                legal_name = #{sup.legal_name},
+            </if>
+            <if test="sup.legal_number!=null and sup.legal_number!='' ">
+                legal_number = #{sup.legal_number},
+            </if>
+            <if test="sup.business_contact!=null and sup.business_contact!='' ">
+                business_contact = #{sup.business_contact},
+            </if>
+            <if test="sup.bu_contact_phone!=null and sup.bu_contact_phone!='' ">
+                bu_contact_phone = #{sup.bu_contact_phone},
+            </if>
+            <if test="sup.bank!=null and sup.bank!='' ">
+                bank = #{sup.bank},
+            </if>
+            <if test="sup.bank_number!=null and sup.bank_number!='' ">
+                bank_number = #{sup.bank_number},
+            </if>
+            <if test="sup.address!=null and sup.address!='' ">
+                address = #{sup.address},
+            </if>
+        </set>
+         WHERE gysid = (select gysid from sys_user where username=#{username});
+    </update>
 
-
+    <update id="updatePassword">
+        update sys_user set
+        password=#{password}
+        where username=#{username}
+    </update>
 </mapper>

@@ -82,7 +82,8 @@ textarea:-webkit-autofill {
  float:left
 }
 .right-wrap {
- float:right!important
+ float:right!important;
+ padding-left: 18px
 }
 .align-left {
  text-align:left!important

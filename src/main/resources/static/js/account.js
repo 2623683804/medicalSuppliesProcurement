@@ -2,11 +2,9 @@ $(document).ready(function(){
 
 
   	$('#frxx').click(function(){
-        if($("#pop-wrap").css('display')=='none'){
+        if($("#pop-wrap").css("display")=="none"){
             $("#pop-wrap").css("display","block");
             $(".pop-mask").css("display","block");
-
-
         }else{
             $("#pop-wrap").css("display","none");
             $(".pop-mask").css("display","none");
@@ -18,7 +16,7 @@ $(document).ready(function(){
 	});
 	
 	$('#qylxrxx').click(function(){
-        if($("#pop-wrap1").css('display')=='none'){
+        if($("#pop-wrap1").css("display")=="none"){
             $("#pop-wrap1").css("display","block");
             $(".pop-mask").css("display","block");
         }else{

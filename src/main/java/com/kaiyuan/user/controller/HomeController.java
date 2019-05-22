@@ -102,27 +102,13 @@ public class HomeController {
         return "administrator/supplier";
     }
 
-    @RequestMapping("/usermanagement/account")
-    public String account(){
-        String name = SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getName();
-        return "usermanagement/account";
-    }
+
 
     @RequestMapping("/usermanagement/purchasingrecords")
     public String purchasingrecords(){
         return "usermanagement/purchasingrecords";
     }
 
-    @RequestMapping("/usermanagement/informationchanges")
-    public String informationchanges(){
-        return "usermanagement/informationchanges";
-    }
 
-    @RequestMapping("/usermanagement/resetpassword")
-    public String resetpassword(){
-        return "usermanagement/resetpassword";
-    }
 
 }

@@ -7,15 +7,15 @@
         <link rel="stylesheet" th:href="@{/css/commonn.css}" />
         <link rel="stylesheet" th:href="@{/css/base.css}" />
 		<link rel="stylesheet" th:href="@{/css/pop.css}" />
-        <script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}"></script>
-		<script type="text/javascript" th:src="@{js/account.js}" ></script>
+        <script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
 	</head>
 
 	<body>
-	<div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
-		<div th:include="common/header_gys" ></div>
-	</div>
-		<div id="container" class="">
+        <div sec:authorize="hasRole('ROLE_USER')"> <!-- 用户类型为ROLE_USER 显示 -->
+            <div th:include="common/header_gys" ></div>
+        </div>
+		<div id="container" class="containermcompany">
 			<div class="width-wrap">
 				<div class="content cl">
 					<!--左侧导航开始-->
@@ -24,15 +24,15 @@
 						<ul class="drdc">
 							
 							<li>
-								<a class="a" href="account.html">账户总览</a>
+								<a class="a" th:href="@{/usermanagement/account}">账户总览</a>
 							</li>
 							<li class="left-nav-line"></li>
 							<li>
-								<a href="purchasingrecords.html">采购申请记录</a>
+								<a th:href="@{/usermanagement/purchasingrecords}">采购申请记录</a>
 							</li>
 							<li class="left-nav-line"></li>
 							<li>
-								<a href="informationchanges.html">企业信息修改</a>
+								<a th:href="@{/usermanagement/informationchanges}">企业信息修改</a>
 							</li>
 							
 							
@@ -52,17 +52,18 @@
                             <div class="asset-list-left">
                                 <dl>
                                     <dt class="sz14 fs2">基本信息</dt>
-                                    <dd class="sz14 fs2">统一社会信用代码：
-                                        <span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
+
+                                    <dd class="sz14 fs2" th:if="${supplieDetails.tyshNumber} != null">统一社会信用代码：
+                                        <span  th:text="${supplieDetails.tyshNumber}" data-loading="small" class="right-wrap font-pro fs"></span>
                                     </dd>
-                                    <dd class="sz14 fs2">税务登记号：
-                                        <span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
+                                    <dd class="sz14 fs2" th:if="${supplieDetails.tax_number} != null">税务登记号：
+                                        <span th:text="${supplieDetails.tax_number}"  data-loading="small" class="right-wrap font-pro fs"></span>
                                     </dd>
-                                    <dd class="sz14 fs2">组织机构代码：
-                                        <span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
+                                    <dd class="sz14 fs2" th:if="${supplieDetails.zzjgNumber} != null">组织机构代码：
+                                        <span th:text="${supplieDetails.zzjgNumber}"  data-loading="small" class="right-wrap font-pro fs"></span>
                                     </dd>
-                                    <dd class="sz14 fs2">开户许可证核准号：
-                                        <span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
+                                    <dd class="sz14 fs2" th:if="${supplieDetails.account_number} != null">开户许可证核准号：
+                                        <span th:text="${supplieDetails.account_number}" data-loading="small" class="right-wrap font-pro fs"></span>
                                     </dd>
                                     
                                     
@@ -71,16 +72,16 @@
                             <div class="asset-list-right right-wrap width-yue">
                                 <dl class="cl">
                                     <dt class="fs2 sz14">用户名：
-                                        <span id="zyFinancingAmount" data-loading="small" class="right-wrap font-pro fs ">XXX</span>
+                                        <span sec:authentication="name" data-loading="small" class="right-wrap font-pro fs "></span>
                                     </dt>
                                     <p class="split-line mb"></p>
                                     <dd class="sz14 fs2">供应商名称： 
-                                    	<span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">XXXX有限公司</span>
+                                    	<span th:text="${supplieDetails.companyName}"  data-loading="small" class="right-wrap font-pro fs">XXXX有限公司</span>
                                     </dd>
                                     <p class="split-line mb"></p>
                                     <dd class="fs2 sz14">详细地址：
-                                    	<span id="qyFinancingAmount" data-loading="small" class="right-wrap font-pro fs ">吉林省吉林市北北华大学</span>
-                                    </dd>
+                                    	<span th:text="${supplieDetails.address}"  data-loading="small" class="right-wrap font-pro fs ">吉林省吉林市北北华大学</span>
+									</dd>
                                 </dl>
                             </div>
                             <div class="asset-right-width-1 red-bg left-wrap balance-height"></div>
@@ -90,18 +91,17 @@
                             <div class="asset-list-left">
                                 <dl>
                                     <dt class="sz14 fs2">法人信息</dt>
-                                    <dd id="zyHoldAmount" data-loading="small" class="sz20 font-pro">436.<span class=" sz20">47</span></dd>
-                                </dl>
+                                    </dl>
                             </div>
                             <div id="zyBox" class="box">
                                 <div class="asset-list-right">
                                     <dl>
                                         <dt class="fs2 sz14">法人姓名：
-                                        	<span id="zyFinancingAmount" data-loading="small" class="right-wrap font-pro fs ">XXX</span>
+                                        	<span th:text="${supplieDetails.legal_name}"  data-loading="small" class="right-wrap font-pro fs ">XXX</span>
                                         </dt>
                                         <p class="split-line mb"></p>
-                                        <dd class="sz14 fs2">法人手机号： 
-                                        	<span id="zyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
+                                        <dd class="sz14 fs2">法人身份证号：
+                                        	<span th:text="${supplieDetails.legal_number}" data-loading="small" class="right-wrap font-pro fs">13089213913</span>
                                         </dd>
                                     </dl>
                                 </div>
@@ -114,18 +114,17 @@
                             <div class="asset-list-left">
                                 <dl>
                                     <dt class="sz14 fs2">企业联系人信息</dt>
-                                    <dd id="yyHoldAmount" data-loading="small" class="sz20 font-pro">0.<span class=" sz20">00</span></dd>
-                                </dl>
+                                   </dl>
                             </div>
                             <div class="box">
                                 <div class="asset-list-right">
                                     <dl>
                                         <dd class="fs2 sz14">企业联系人姓名：
-                                        	<span id="yyFinancingAmount" data-loading="small" class="right-wrap font-pro fs ">XXX</span>
+                                        	<span  th:text="${supplieDetails.business_contact}"  data-loading="small" class="right-wrap font-pro fs ">XXX</span>
                                         </dd>
                                         <p class="split-line mb"></p>
                                         <dd class="sz14 fs2">企业联系人手机号：
-                                            <span id="yyDisinvestAuditAmount" data-loading="small" class="right-wrap font-pro fs">13439643913</span>
+                                            <span  th:text="${supplieDetails.bu_contact_phone}"  data-loading="small" class="right-wrap font-pro fs">13439643913</span>
                                         </dd>
                                         
                                     </dl>
@@ -141,7 +140,7 @@
 			</div>
 		</div>
 
-
+                </div></div></div>
 <div class="pop-wrap" id="pop-wrap" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
 	<div class="pop-title">
 		<a href="javascript:void(0);" class="right-wrap" id="right-wrap">
@@ -150,26 +149,26 @@
 		<h3>法人信息修改</h3>
 	</div>
 	<div class="pop-pay">
-		<form>
+		<form method="post" action="/updateSupplieDetails">
 			<div class=" control-row">
 				<div class="control-label">
 					法人姓名：
 				</div>
 				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="法人姓名" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.legal_name}" type="text" placeholder="法人姓名" name="legal_name" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 				
 			</div>
 			<div class=" control-row">
 				<div class="control-label control-label-width">
-					法人电话号：
+					法人身份证号：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="法人电话号" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.legal_number}" type="text" placeholder="法人身份证号" name="legal_number" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div align="center">
-				<input type="button" class="button green-button mb" value="保存"/>
+				<input type="submit" class="button green-button mb" value="保存"/>
 			</div>
 		</form>
 	</div>
@@ -180,16 +179,16 @@
 		<a href="javascript:void(0);" class="right-wrap" id="right-wrap1">
 			<i class="common-icon close-icon"></i>
 		</a>
-		<h3>法人信息修改</h3>
+		<h3>企业联系人信息修改</h3>
 	</div>
 	<div class="pop-pay">
-		<form>
+		<form method="post" action="/updateSupplieDetails">
 			<div class=" control-row">
 				<div class="control-label">
 					企业联系人姓名：
 				</div>
 				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="企业联系人姓名" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.business_contact}" type="text" placeholder="企业联系人姓名" name="business_contact" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 				
 			</div>
@@ -198,11 +197,11 @@
 					企业联系人姓名电话号：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="企业联系人姓名电话号" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input th:value="${supplieDetails.bu_contact_phone}" type="text" placeholder="企业联系人姓名电话号" name="bu_contact_phone" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div align="center">
-				<input type="button" class="button green-button mb" value="保存"/>
+				<input type="submit" class="button green-button mb" value="保存"/>
 			</div>
 		</form>
 	</div>
@@ -210,5 +209,5 @@
 
 <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 	</body>
-    <script type="text/javascript" th:src="@{js/core.js}" ></script>
+    <script type="text/javascript" th:src="@{/js/core.js}" ></script>
 </html>

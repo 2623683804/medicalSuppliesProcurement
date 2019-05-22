@@ -24,7 +24,7 @@
 						<ul class="cl">
 							<div sec:authorize="isAuthenticated()">
 								<li t="l">您好，
-									<a href="#" sec:authentication="name"></a>
+									<a id="nameuser" href="#" sec:authentication="name"></a>
 
 									<form id="loginForm" th:action="@{/logout}" method="post" style="margin:0px;display:inline;">
 										<!--<input type="submit"  value="[退出]"/>-->
