@@ -111,4 +111,33 @@
         password=#{password}
         where username=#{username}
     </update>
+
+    <delete id="deleteGysSupplie" parameterType="Integer">
+     	delete from supplie_details where gysid= #{gysid}
+	</delete>
+
+    <delete id="deleteGysUser" parameterType="Integer">
+     	delete from sys_user where gysid= #{gysid}
+	</delete>
+
+    <select id="querySupplieCount" resultType="java.lang.Integer">
+        select count(gysid)
+        from supplie_details
+        where  1=1
+        <if test="companyName!=null and companyName!=''">and companyName like  concat('%',#{companyName},'%')</if>
+
+    </select>
+
+    <select id="querySupplieList" parameterType="String"  resultType="com.kaiyuan.user.entity.SupplieDetails">
+        select *
+        from supplie_details
+        where  1=1
+        <if test="companyName!=null and companyName!=''">
+            and companyName like  concat('%',#{companyName},'%')
+        </if>
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
+
 </mapper>

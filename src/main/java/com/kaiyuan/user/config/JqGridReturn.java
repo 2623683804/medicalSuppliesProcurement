@@ -89,4 +89,15 @@ public class JqGridReturn {
         this.pageSize = pageSize;
     }
 
+    @Override
+    public String toString() {
+        return "JqGridReturn{" +
+                "total=" + total +
+                ", p=" + p +
+                ", rows=" + rows +
+                ", footer=" + footer +
+                ", totolPage=" + totolPage +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }

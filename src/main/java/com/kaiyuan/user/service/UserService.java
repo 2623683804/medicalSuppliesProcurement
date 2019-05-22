@@ -1,5 +1,6 @@
 package com.kaiyuan.user.service;
 
+import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.dao.UserMapper;
 import com.kaiyuan.user.entity.SupplieDetails;
 import org.slf4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService implements UserServiceImpl{
@@ -49,8 +52,50 @@ public class UserService implements UserServiceImpl{
     }
 
     @Override
-    public boolean updatePassword(String username,String password){
+    public boolean updatePassword(String username, String password){
         return userMapper.updatePassword(username,password)==1;
     }
 
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED)
+    public boolean deleteGys(Integer gysid){
+        if (userMapper.deleteGysSupplie(gysid)){
+            if ( userMapper.deleteGysUser(gysid)){
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public int querySupplieCount(Map<String, Object> map) {
+        return userMapper.querySupplieCount(map);
+    }
+
+
+
+    @Override
+    public List<SupplieDetails> querySupplieList(Map<String, Object> map) {
+        return userMapper.querySupplieList(map);
+    }
+
+    /**
+     * 分页查询
+     * @return
+     */
+    @Override
+    public JqGridReturn selectSupplie(Map<String, Object> map){
+
+        List<SupplieDetails> list=userMapper.querySupplieList(map);
+        JqGridReturn jq=new JqGridReturn();
+        jq.setRows(list);
+        logger.info(jq.getRows().toString());
+        jq.setTotal(querySupplieCount(map));
+        jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
+        return jq;
+
+    }
 }

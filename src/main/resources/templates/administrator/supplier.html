@@ -4,18 +4,21 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>海马供应商信息管理 - 海马官网</title>
-		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" th:href="@{css/commonn.css}" />
-		<link rel="stylesheet" th:href="@{css/base.css}" />
-		<link rel="stylesheet" th:href="@{css/pop.css}" />
-		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
-		<script type="text/javascript" th:src="@{js/account.js}" ></script>
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/favicon.ico}" />
+		<link rel="stylesheet" th:href="@{/css/commonn.css}" />
+		<link rel="stylesheet" th:href="@{/css/base.css}" />
+		<link rel="stylesheet" th:href="@{/css/pop.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
 
 	</head>
 
 	<body>
-		
-		<div class="wrap">
+	<div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+		<div th:include="common/header_xt" ></div>
+	</div>
+
+	<div class="wrap">
 			<!--内容开始-->
 			<div class="containermcompany">
 				<div class="width-wrap white-bg add-border cl">
@@ -25,24 +28,21 @@
 					</div>
 
 			<!--筛选开始-->
-                <form>
+                <form method="post" action="/administrator/supplier">
 					<div class="form-wrap-5" id="divCompanyInfo">
 						<div class=" control-row">
-				<div class="control-label">
-					供应商名称：
-				</div>
-				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="供应商名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
-				</div>
-				
-			</div>
-
+                            <div class="control-label">
+                                供应商名称：
+                            </div>
+                            <div class="control-input control-text  relative1">
+                                <input type="text" placeholder="供应商名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+                            </div>
+				        </div>
 					</div>
 					<div align="center">
 						<input type="button" class="button2 mb" value="重置"/>
-					<input type="button" class="button green-button mb" value="查询"/>
+					    <input type="submit" class="button green-button mb" value="查询"/>
 					</div>
-					
                 </form>
                 
 				<div class=" split-line mt mb"></div>
@@ -51,71 +51,53 @@
                 <div class="table-list sz14">
                     <table class="table-fixed" width="100%" cellspacing="0" cellpadding="0">
                         <thead>
-                        <tr>
-                            <th class="align-center" width="90">企业名称</th>
-                            <th class="align-center" width="120">统一社会信用代码</th>
-                            <th class="align-center" width="100">组织机构代码</th>
-                            <th class="align-center" width="55">法人名称</th>
-                            <th class="align-center" width="55" >企业联系人</th>
-                            <th class="align-center" width="80">企业联系人手机号</th>
-                            <th class="align-center" width="150" >详细地址</th>
-                            <th class="align-center" width="30" >操作</th>
-                        </tr>
+                            <tr>
+                                <th class="align-center" width="90">编号</th>
+                                <th class="align-center" width="90">企业名称</th>
+                                <th class="align-center" width="120">统一社会信用代码</th>
+                                <th class="align-center" width="100">组织机构代码</th>
+                                <th class="align-center" width="100">税务登记号</th>
+                                <th class="align-center" width="100">开户许可证核准号</th>
+
+                                <th class="align-center" width="30" >操作</th>
+                            </tr>
                         </thead>
                         <tbody class="recordLists">
-    
-					    <tr class="drdc">
-					       
-					        
-					        <td class="align-center">XXX有限公司</td>
-					        <td class="align-center relative">
-					            <em class="fs1">123456789012345678</em>
-					        </td>
-					        <td class="align-center font-pro relative">
-					            <em class="fs4 sz14">123456789012345</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">周航</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">刘鹤松</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">13089213913</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">刘鹤松</em>
-					        </td>
-					        <td class="align-center">
-					        	
-					         	<input type="button" class="button mb" value="删除" />			            
-					            	
-					        </td>
-					    </tr>
+                            <tr th:each="SupplieDetails : ${jq.rows}">
+
+                                <td class="align-center" th:text="${SupplieDetails.gysid}">11</td>
+                                <td class="align-center" th:text="${SupplieDetails.companyName}" >11</td>
+                                <td class="align-center" th:text="${SupplieDetails.tyshNumber}" >--</td>
+                                <td class="align-center" th:text="${SupplieDetails.zzjgNumber}" >--</td>
+                                <td class="align-center" th:text="${SupplieDetails.tax_number}" >--</td>
+                                <td class="align-center" th:text="${SupplieDetails.account_number}" >11</td>
+                               <td class="align-center">
+                                    <a  class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deleteGys/'+${SupplieDetails.gysid}}">删除</a>
+                                </td>
+                            </tr>
 					    </tbody>
 					</table>
 				        </div>
 				        <!--列表结束-->
-				        <!--翻页开始-->
-				        <div class="paging-box">
-				        	<div class="paging align-right sz14">
-				        		<a class="ky_pre_page" href="javascript:void(0);">
-				        			<i class="common-icon-New pre-icon"></i>
-				        		</a>
-				        	<a href="javascript:void(0);" class="a">1</a>
-				        	<a href="javascript:void(0);">2</a>
-				        	<a href="javascript:void(0);">3</a>
-				        	<a href="javascript:void(0);">4</a>
-				        	<a href="javascript:void(0);">5</a>
-				        	<span>...</span>
-				        	<a href="javascript:void(0);">8</a>
-				        	<a href="javascript:void(0);">9</a>
-				        	<a href="#" class="ky_next_page delmr">
-				        		<i class="common-icon-New pre-icon flipx"></i>
-				        	</a>
-				        	</div>
-				        </div>
-				        <!--翻页结束-->
+					<!--翻页开始-->
+					<div class=" split-line mt mb"></div>
+					<div style="text-align:center;font-size: 15px">
+						<label>第<span th:text="${jq.p}"></span>/<span th:text="${jq.totolPage}"></span>页   共<span th:text="${jq.total}"></span>条</label>
+						<a th:href="@{/administrator/supplier(p = 1,companyName=${companyName})}" type="button" role=button class="button green-button mb">首页</a>
+						<a th:if="${jq.p > 1}" th:href="@{/administrator/supplier(p=${jq.p - 1},companyName=${companyName})}"  type="button" role=button class="button green-button mb">上一页</a>
+						<a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
+						<a th:if="${jq.p != jq.pageSize}" th:href="@{/administrator/supplier(p=${jq.p + 1},companyName=${companyName})}"  type="button" role=button class="button green-button mb">下一页</a>
+						<a th:if="${jq.p == jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+						<a th:href="@{/administrator/supplier(p=${jq.totolPage},companyName=${companyName})}" type="button" role=button class="button green-button mb">尾页</a>
+
+						<form action="/administrator/supplier" method="post" style="margin:0px;display:inline;">
+						跳转到: <input type="text" style="width: 30px" name="p" />页
+						<!--(user_id=${user_id},name=${name},status=${status})-->
+						<input type="hidden"  name="companyName" th:value="${companyName}"/>
+						<input type="submit" value="跳转" class="button green-button mb"/>
+					</form>
+				</div>
+				<!--翻页结束-->
 				    </div>
 					<!--右侧内容结束-->
 
@@ -124,5 +106,5 @@
 			</div>
 			
 	</body>
-		<script type="text/javascript" th:src="@{js/core.js}"></script>
+		<script type="text/javascript" th:src="@{/js/core.js}"></script>
 </html>

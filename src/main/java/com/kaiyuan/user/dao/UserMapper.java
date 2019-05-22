@@ -5,6 +5,9 @@ import com.kaiyuan.user.entity.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface UserMapper {
 
@@ -23,4 +26,14 @@ public interface UserMapper {
 
      int updateSupplieDetails(@Param("sup")SupplieDetails supplieDetails,@Param("username")String username);
      int updatePassword(@Param("username")String username,@Param("password")String password);
+
+     boolean deleteGysSupplie(Integer gysid);
+     boolean deleteGysUser(Integer gysid);
+
+     //管理员根据条件查询总条数
+     int querySupplieCount(Map<String, Object> map);
+
+    //管理员根据条件分页
+     List<SupplieDetails> querySupplieList (Map<String, Object> map);
+
 }

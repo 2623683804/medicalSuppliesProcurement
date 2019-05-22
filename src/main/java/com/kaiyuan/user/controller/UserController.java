@@ -1,5 +1,6 @@
 package com.kaiyuan.user.controller;
 
+import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.entity.SupplieDetails;
 import com.kaiyuan.user.service.UserService;
 import com.kaiyuan.user.service.UserServiceImpl;
@@ -8,10 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -102,5 +109,47 @@ public class UserController {
             return "usermanagement/resetpassword";
         }
 
+    }
+
+    @GetMapping("/administrator/supplier")
+    public String supplier(Model model, HttpServletRequest request){
+        String p = request.getParameter("p");
+        logger.info("p="+p);
+        Integer start;
+        if (null == p){
+            start=null;
+        }else {
+            start = Integer.parseInt(p);
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (start!=null) {
+            if (start<=0) {
+                start=1;
+            }
+            map.put("start", (start-1)*10);
+        }else{
+            map.put("start", 0);
+        }
+        String companyName = request.getParameter("companyName");
+        logger.info("companyName="+companyName);
+        map.put("companyName",companyName);
+        map.put("p",p);
+        JqGridReturn jq = userService.selectSupplie(map);
+        logger.info(jq.toString());
+        if (null == p){
+            logger.info("p=null");
+        }else {
+            jq.setP(Integer.parseInt(p));
+        }
+        model.addAttribute("jq",jq);//list Total TotolPage
+        model.addAttribute("companyName",companyName);
+        logger.info("XXXX");
+        return "administrator/supplier";
+    }
+
+    @GetMapping("/deleteGys/{gysid}")
+    public ModelAndView deleteGys(@PathVariable("gysid") Integer gysid) {
+        userService.deleteGys(gysid);
+        return new ModelAndView("redirect:/administrator/supplier");//重定向到list页面
     }
 }
