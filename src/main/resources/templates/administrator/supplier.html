@@ -28,19 +28,19 @@
 					</div>
 
 			<!--筛选开始-->
-                <form method="post" action="/administrator/supplier">
+                <form method="get" action="/administrator/supplier">
 					<div class="form-wrap-5" id="divCompanyInfo">
 						<div class=" control-row">
                             <div class="control-label">
                                 供应商名称：
                             </div>
                             <div class="control-input control-text  relative1">
-                                <input type="text" placeholder="供应商名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
+                                <input type="text" placeholder="供应商名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name" />
                             </div>
 				        </div>
 					</div>
 					<div align="center">
-						<input type="button" class="button2 mb" value="重置"/>
+						<input type="reset" class="button2 mb" value="重置"/>
 					    <input type="submit" class="button green-button mb" value="查询"/>
 					</div>
                 </form>
@@ -86,11 +86,12 @@
 						<a th:href="@{/administrator/supplier(p = 1,companyName=${companyName})}" type="button" role=button class="button green-button mb">首页</a>
 						<a th:if="${jq.p > 1}" th:href="@{/administrator/supplier(p=${jq.p - 1},companyName=${companyName})}"  type="button" role=button class="button green-button mb">上一页</a>
 						<a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
-						<a th:if="${jq.p != jq.pageSize}" th:href="@{/administrator/supplier(p=${jq.p + 1},companyName=${companyName})}"  type="button" role=button class="button green-button mb">下一页</a>
-						<a th:if="${jq.p == jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+						<a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+						<a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/supplier(p=${jq.p + 1},companyName=${companyName})}"  type="button" role=button class="button green-button mb">下一页</a>
+
 						<a th:href="@{/administrator/supplier(p=${jq.totolPage},companyName=${companyName})}" type="button" role=button class="button green-button mb">尾页</a>
 
-						<form action="/administrator/supplier" method="post" style="margin:0px;display:inline;">
+						<form action="/administrator/supplier" method="get" style="margin:0px;display:inline;">
 						跳转到: <input type="text" style="width: 30px" name="p" />页
 						<!--(user_id=${user_id},name=${name},status=${status})-->
 						<input type="hidden"  name="companyName" th:value="${companyName}"/>
@@ -104,7 +105,7 @@
 
 				</div>
 			</div>
-			
+    <div th:include="common/footer" ></div>
 	</body>
 		<script type="text/javascript" th:src="@{/js/core.js}"></script>
 </html>

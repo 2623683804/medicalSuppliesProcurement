@@ -2,6 +2,7 @@ package com.kaiyuan.user.service;
 
 import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.entity.SupplieDetails;
+import com.kaiyuan.user.entity.SysUser;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,4 +27,16 @@ public interface UserServiceImpl {
 
     JqGridReturn selectSupplie(Map<String, Object> map);
 
+    int queryGlyCount(Map<String, Object> map);
+
+    List<SysUser> queryGlyList(Map<String, Object> map);
+
+    JqGridReturn selectGlyList(Map<String, Object> map);
+
+    @Transactional(propagation= Propagation.REQUIRED)
+    boolean deleteGlyUser(Integer id);
+
+    boolean addGly(SysUser sysUser);
+
+    boolean updateGly(SysUser sysUser);
 }

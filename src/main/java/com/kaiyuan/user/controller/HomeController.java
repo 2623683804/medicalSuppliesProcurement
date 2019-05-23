@@ -91,17 +91,17 @@ public class HomeController {
 
 
 
-    @RequestMapping("/administrator/gldministrator")
-    public String gldministrator(){
-        return "administrator/gldministrator";
-    }
-
-
-    @RequestMapping("/administrator/supplier")
-    public String supplier(){
-        return "administrator/supplier";
-    }
-
+//    @RequestMapping("/administrator/gldministrator")
+//    public String gldministrator(){
+//        return "administrator/gldministrator";
+//    }
+//
+//
+//    @RequestMapping("/administrator/supplier")
+//    public String supplier(){
+//        return "administrator/supplier";
+//    }
+//
 
 
     @RequestMapping("/usermanagement/purchasingrecords")

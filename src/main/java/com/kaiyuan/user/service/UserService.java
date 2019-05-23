@@ -1,8 +1,10 @@
 package com.kaiyuan.user.service;
 
+import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.dao.UserMapper;
 import com.kaiyuan.user.entity.SupplieDetails;
+import com.kaiyuan.user.entity.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -61,7 +64,11 @@ public class UserService implements UserServiceImpl{
     public boolean deleteGys(Integer gysid){
         if (userMapper.deleteGysSupplie(gysid)){
             if ( userMapper.deleteGysUser(gysid)){
-                return true;
+                if(userMapper.deleteUserRole(gysid)){
+                    return true;
+                }else {
+                    return false;
+                }
             }else{
                 return false;
             }
@@ -74,8 +81,6 @@ public class UserService implements UserServiceImpl{
     public int querySupplieCount(Map<String, Object> map) {
         return userMapper.querySupplieCount(map);
     }
-
-
 
     @Override
     public List<SupplieDetails> querySupplieList(Map<String, Object> map) {
@@ -98,4 +103,62 @@ public class UserService implements UserServiceImpl{
         return jq;
 
     }
+
+
+    @Override
+    public int queryGlyCount(Map<String, Object> map) {
+        return userMapper.queryGlyCount(map);
+    }
+
+    @Override
+    public List<SysUser> queryGlyList(Map<String, Object> map) {
+        return userMapper.queryGlyList(map);
+    }
+
+    /**
+     * 分页查询
+     * @return
+     */
+    @Override
+    public JqGridReturn selectGlyList(Map<String, Object> map){
+
+        List<SysUser> list=userMapper.queryGlyList(map);
+        JqGridReturn jq=new JqGridReturn();
+        jq.setRows(list);
+        logger.info(jq.getRows().toString());
+        jq.setTotal(queryGlyCount(map));
+        jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
+        return jq;
+
+    }
+
+    @Override
+    @Transactional(propagation= Propagation.REQUIRED)
+    public boolean deleteGlyUser(Integer id){
+        if (userMapper.deleteGlyUser(id)){
+            if(userMapper.deleteGlyRole(id)){
+                return true;
+            }else {
+                return false;
+            }
+
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean addGly(SysUser sysUser){
+        userMapper.addGlyUser(sysUser);
+        ;
+        return userMapper.addGlyRole(userMapper.findByUserId(sysUser.getUsername()).getId(),sysUser.getGlylx());
+    }
+
+    @Override
+    public boolean updateGly(SysUser sysUser) {
+        userMapper.updateGlyUser(sysUser);
+
+        return userMapper.updateGlyRole(userMapper.findByUserId(sysUser.getUsername()).getId(),sysUser.getGlylx());
+    }
+
 }

@@ -10,7 +10,12 @@
 		<link rel="stylesheet" th:href="@{/css/pop.css}" />
 		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
 		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
-
+        <script type="text/javascript">
+            function updateMed(a){
+                //可正常赋值
+                $("#userid").attr("value",a);
+            }
+        </script>
 	</head>
 
 	<body>
@@ -23,40 +28,38 @@
 			<div class="containermcompany">
 				<div class="width-wrap white-bg add-border cl">
 					<div class="title">
-						<h3>管理员信息管理<a id="glygl" href="#" class="button1 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
+						<h3>管理员信息管理<a id="glygl" href="#" class="button7 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
 						
 					</div>
 
-			<!--筛选开始-->
-                <form>
-					<div class="form-wrap-5" id="divCompanyInfo">
-						<div class=" control-row">
-				<div class="control-label">
-					管理员名称：
-				</div>
-				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="管理员名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
-				</div>
-				
-			</div>
-
-			<div class=" control-row">
-				<div class="control-label">
-					管理员类型：
-				</div>
-				<div class="control-input control-text  relative1">
-		            <select name="" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
-						<option value="0">请选择</option> 
-						<option value="1">采购管理员</option>
-						<option value="2">采购审批管理员</option>
-						<option value="3">医用品管理员</option> 
-					</select> 
-				</div>
+                <!--筛选开始-->
+                    <form action="/administrator/gldministrator" method="get">
+                        <div class="form-wrap-5" id="divCompanyInfo">
+                            <div class=" control-row">
+                    <div class="control-label">
+                        管理员名称：
+                    </div>
+                    <div class="control-input control-text  relative1">
+                        <input type="text" placeholder="管理员名称" name="username" class=" input-text input-text-long1 left-wrap input-company-name">
+                    </div>
+                </div>
+                <div class=" control-row">
+                    <div class="control-label">
+                        管理员类型：
+                    </div>
+                    <div class="control-input control-text  relative1">
+                        <select name="glyLx" class="input-text input-text-long1 left-wrap">
+                            <option value="">请选择</option>
+                            <option value="4">采购管理员</option>
+                            <option value="3">采购审批管理员</option>
+                            <option value="5">医用品管理员</option>
+                        </select>
+                    </div>
 			</div>
 					</div>
 					<div align="center">
-						<input type="button" class="button2 mb" value="重置"/>
-					<input type="button" class="button green-button mb" value="查询"/>
+						<input type="reset" class="button2 mb" value="重置"/>
+						<input type="submit" class="button green-button mb" value="查询"/>
 					</div>
 					
                 </form>
@@ -71,103 +74,111 @@
                             <th class="align-center" width="60">管理员ID</th>
                             <th class="align-center" width="90">管理员名称</th>
                             <th class="align-center" width="60">密码</th>
-                            <th class="align-center" width="100">创建时间</th>
                             <th class="align-center" width="75" >管理员类型</th>
                             <th class="align-center" width="120">操作</th>
                         </tr>
                         </thead>
                         <tbody class="recordLists">
-    
-					    <tr class="drdc">
-					       
-					        
-					        <td class="align-center">111</td>
-					        <td class="align-center relative">
-					            <em class="fs1">周航</em>
-					        </td>
-					        <td class="align-center font-pro relative">
-					            <em class="fs4 sz14">che001</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">2019-04-13</em>
-					        </td>
-					        <td class="align-center">
-					        	<em class="fs2 font-pro">采购管理员</em>
-					        </td>
-					        <td class="align-center">
-					        	<input id="glyxg" type="button" class="button2 mb" value="修改" />
-					         	<input type="button" class="button mb" value="删除" />			            
-					            	
-					        </td>
+
+                        <tr th:each="SysUser : ${jq.rows}">
+					        <td class="align-center" th:text="${SysUser.id}"></td>
+					        <td class="align-center relative"  th:text="${SysUser.username}"></td>
+					        <td class="align-center font-pro relative" th:text="${SysUser.password}"></td>
+                            <div th:if="${SysUser.glylx} == 3">
+                                <td class="align-center" >采购审批管理员</td>
+                            </div>
+                            <div th:if="${SysUser.glylx} == 4">
+                                <td class="align-center" >采购管理员</td>
+                            </div>
+                            <div th:if="${SysUser.glylx} == 5">
+                                <td class="align-center" >医用品管理员</td>
+                            </div>
+                            <td class="align-center">
+                                <input id="glyxg"  type="button" class="tjyyp1 button2 mb" th:onclick="'javascript:updateMed(\''+${SysUser.id}+'\');'"  value="修改" />
+                                <!--th:onclick="'javascript:updateMed(\''+${MedicalInformation.id}+'\');'"-->
+                                <a  class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deleteGly/'+${SysUser.id}}">删除</a>
+                            </td>
 					    </tr>
 					    </tbody>
 					</table>
 				        </div>
 				        <!--列表结束-->
-					<form action="/administrator/medicalsupplies" method="post" style="margin:0px;display:inline;">
-						跳转到: <input type="text" style="width: 30px" name="p" />页
-						<!--(user_id=${user_id},name=${name},status=${status})-->
-						<input type="hidden"  name="name" th:value="${name}"/>
-						<input type="hidden"  name="user_id" th:value="${user_id}"/>
-						<input type="hidden"  name="status" th:value="${status}"/>
-						<input type="submit" value="跳转" class="button green-button mb"/>
-					</form>
-				</div>
-				<!--翻页结束-->
+					<!--翻页开始-->
+					<div class=" split-line mt mb"></div>
+					<div style="text-align:center;font-size: 15px">
+						<label>第<span th:text="${jq.p}"></span>/<span th:text="${jq.totolPage}"></span>页   共<span th:text="${jq.total}"></span>条</label>
+						<a th:href="@{/administrator/gldministrator(p = 1,username=${username},glyLx=${glyLx})}" type="button" role=button class="button green-button mb">首页</a>
+						<a th:if="${jq.p > 1}" th:href="@{/administrator/gldministrator(p=${jq.p - 1},username=${username},glyLx=${glyLx})}"  type="button" role=button class="button green-button mb">上一页</a>
+						<a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
+						<a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+						<a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/gldministrator(p=${jq.p + 1},username=${username},glyLx=${glyLx})}"  type="button" role=button class="button green-button mb">下一页</a>
+
+						<a th:href="@{/administrator/gldministrator(p=${jq.totolPage},username=${username},glyLx=${glyLx})}" type="button" role=button class="button green-button mb">尾页</a>
+
+						<!--<form action="/administrator/gldministrator" method="get" style="margin:0px;display:inline;">-->
+							<!--跳转到: <input type="text" style="width: 30px" name="p" />页-->
+							<!--&lt;!&ndash;(user_id=${user_id},name=${name},status=${status})&ndash;&gt;-->
+							<!--<input type="hidden"  name="username" th:value="${username}"/>-->
+                            <!--<input type="hidden"  name="glyLx" th:value="${glyLx}"/>-->
+							<!--<input type="submit" value="跳转" class="button green-button mb"/>-->
+						<!--</form>-->
+					</div>
+					<!--翻页结束-->
 				    </div>
 					<!--右侧内容结束-->
 
 
 				</div>
 			</div>
-			
-<div class="pop-wrap" id="pop-wrap6" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
-	<div class="pop-title">
-		<a href="javascript:void(0);" class="right-wrap" id="right-wrap6">
-			<i class="common-icon close-icon"></i>
-		</a>
-		<h3>管理员管理</h3>
-	</div>
-	<div class="pop-pay">
-		<form>
-			<div class=" control-row">
-				<div class="control-label">
-					管理员名称：
-				</div>
-				<div class="control-input control-text  relative1">
-					<input type="text" placeholder="管理员名称" name="companyName" class=" input-text input-text-long1 left-wrap input-company-name">
-				</div>
-				
-			</div>
-			
-			<div class=" control-row">
-				<div class="control-label control-label-width">
-					管理员密码：
-				</div>
-				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="管理员密码" name="companyId" class=" input-text input-text-long1 left-wrap input-company-name">
-				</div>
-			</div>
-			<div class=" control-row">
-				<div class="control-label">
-					管理员类型：
-				</div>
-				<div class="control-input control-text  relative1">
-		            <select name="" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
-						<option value="0">请选择</option> 
-						<option value="1">采购管理员</option> 
-						<option value="2">采购审批管理员</option> 
-						<option value="3">医用品管理员</option> 
-					</select> 
-				</div>
-			</div>
-			<div align="center">
-				<input type="button" class="button green-button mb" value="保存"/>
-			</div>
-		</form>
-	</div>
-</div>
-<div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
+        <div th:include="common/footer" ></div>
+
+        <div class="pop-wrap" id="pop-wrap6" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
+            <div class="pop-title">
+                <a href="javascript:void(0);" class="right-wrap" id="right-wrap6">
+                    <i class="common-icon close-icon"></i>
+                </a>
+                <h3>管理员管理</h3>
+            </div>
+            <div class="pop-pay">
+                <form method="post" action="/addAndUpdateGly">
+                    <input id="userid" type="text" placeholder="glyid" name="id"  value="" style="display:none">
+                    <div class=" control-row">
+                        <div class="control-label">
+                            管理员名称：
+                        </div>
+                        <div class="control-input control-text  relative1">
+                            <input type="text" placeholder="管理员名称" name="username" class=" input-text input-text-long1 left-wrap input-company-name">
+                        </div>
+                    </div>
+
+                    <div class=" control-row">
+                        <div class="control-label control-label-width">
+                            管理员密码：
+                        </div>
+                        <div class="control-input select-small control-text lh40 relative1 cl">
+                            <input type="text" placeholder="管理员密码" name="password" class=" input-text input-text-long1 left-wrap input-company-name">
+                        </div>
+                    </div>
+                    <div class=" control-row">
+                        <div class="control-label">
+                            管理员类型：
+                        </div>
+                        <div class="control-input control-text  relative1">
+                            <select name="glylx" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
+                                <option value="">请选择</option>
+                                <option value="4">采购管理员</option>
+                                <option value="3">采购审批管理员</option>
+                                <option value="5">医用品管理员</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div align="center">
+                        <input type="submit" class="button green-button mb" value="保存"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 	</body>
-		<script type="text/javascript" th:src="@{js/core.js}"></script>
+		<script type="text/javascript" th:src="@{/js/core.js}"></script>
 </html>

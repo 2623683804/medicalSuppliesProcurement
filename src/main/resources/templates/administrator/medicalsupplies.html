@@ -44,7 +44,7 @@
 					</div>
 
 			<!--筛选开始-->
-                <form action="/administrator/medicalsupplies" method="post">
+                <form action="/administrator/medicalsupplies" method="get">
 					<div class="form-wrap-5" id="divCompanyInfo">
 						<div class=" control-row">
 							<div class="control-label">
@@ -131,19 +131,17 @@
                 </div>
 				        <!--列表结束-->
 				        <!--翻页开始-->
-                <!--<div class="pager" th:replace="base :: page_pager(${p.currentpage}, ${p.totalpage}, /screening/queryJump,/screening/queryNext/,/screening/queryEnd,/administrator/medicalsupplies})">-->
-                <!--</div>-->
                     <div class=" split-line mt mb"></div>
                     <div style="text-align:center;font-size: 15px">
                         <label>第<span th:text="${jq.p}"></span>/<span th:text="${jq.totolPage}"></span>页   共<span th:text="${jq.total}"></span>条</label>
                         <a th:href="@{/administrator/medicalsupplies(p = 1,user_id=${user_id},name=${name},status=${status})}" type="button" role=button class="button green-button mb">首页</a>
                         <a th:if="${jq.p > 1}" th:href="@{/administrator/medicalsupplies(p=${jq.p - 1},user_id=${user_id},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">上一页</a>
                         <a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
-                        <a th:if="${jq.p != jq.pageSize}" th:href="@{/administrator/medicalsupplies(p=${jq.p + 1},user_id=${user_id},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">下一页</a>
-                        <a th:if="${jq.p == jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+                        <a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/medicalsupplies(p=${jq.p + 1},user_id=${user_id},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">下一页</a>
+                        <a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
                         <a th:href="@{/administrator/medicalsupplies(p=${jq.totolPage},user_id=${user_id},name=${name},status=${status})}" type="button" role=button class="button green-button mb">尾页</a>
 
-                    <form action="/administrator/medicalsupplies" method="post" style="margin:0px;display:inline;">
+                    <form action="/administrator/medicalsupplies" method="get" style="margin:0px;display:inline;">
                         跳转到: <input type="text" style="width: 30px" name="p" />页
                         <!--(user_id=${user_id},name=${name},status=${status})-->
                         <input type="hidden"  name="name" th:value="${name}"/>

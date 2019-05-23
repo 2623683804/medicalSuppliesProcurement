@@ -27,6 +27,7 @@
         where username= #{username}
     </select>
 
+    <!--注册供应商，begin-->
     <insert id="addGysUserOne" parameterType="com.kaiyuan.user.entity.SysUser">
 		insert into sys_user
 		(username,password,status)
@@ -48,6 +49,7 @@
 		(#{companyName},#{zzjgNumber},#{tyshNumber},#{tax_number},#{account_number},#{legal_name},#{legal_number},#{business_contact},#{bu_contact_phone},#{bank},#{bank_number},#{address})
 	</insert>
 
+
     <select id="queryGlyid" resultType="com.kaiyuan.user.entity.SupplieDetails">
         select * from supplie_details where companyName=#{companyName}
     </select>
@@ -58,7 +60,9 @@
         status=2
         where username=#{username}
     </update>
+    <!--注册供应商，end-->
 
+    <!--修改供应商，begin-->
     <select id="queryGysAll"  resultType="com.kaiyuan.user.entity.SupplieDetails">
         select * from supplie_details where gysid=(select gysid from sys_user where username=#{username})
     </select>
@@ -111,13 +115,19 @@
         password=#{password}
         where username=#{username}
     </update>
+    <!--修改供应商，end-->
 
+<!--admin供应商信息管理，begin-->
     <delete id="deleteGysSupplie" parameterType="Integer">
      	delete from supplie_details where gysid= #{gysid}
 	</delete>
 
     <delete id="deleteGysUser" parameterType="Integer">
      	delete from sys_user where gysid= #{gysid}
+	</delete>
+
+    <delete id="deleteUserRole" parameterType="Integer">
+        delete from sys_role_user where Sys_User_id=(select id from sys_user where gysid= #{gysid})
 	</delete>
 
     <select id="querySupplieCount" resultType="java.lang.Integer">
@@ -139,5 +149,65 @@
             limit #{start} ,10
         </if>
     </select>
+<!--admin供应商信息管理，end-->
 
+<!--管理员，begin-->
+    <select id="queryGlyCount" resultType="java.lang.Integer">
+        select count(id)
+        from sys_user
+        where  1=1  and glylx in (  3,4,5)
+        <if test="glyLx!=null and glyLx!=''">
+            and glylx =#{glyLx}
+        </if>
+        <if test="username!=null and username!=''">
+            and username like  concat('%',#{username},'%')
+        </if>
+    </select>
+
+    <select id="queryGlyList" parameterType="String"  resultType="com.kaiyuan.user.entity.SysUser">
+        select *
+        from sys_user
+        where  1=1 and glylx in ( 3,4,5)
+        <if test="glyLx!=null and glyLx!=''">
+            and glylx =#{glyLx}
+        </if>
+        <if test="username!=null and username!=''">
+            and username like  concat('%',#{username},'%')
+        </if>
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
+    <insert id="addGlyUser" parameterType="com.kaiyuan.user.entity.SysUser">
+		insert into sys_user
+		(username,password,glylx)
+		values
+		(#{username},#{password},#{glylx})
+	</insert>
+
+    <insert id="addGlyRole" >
+		insert into sys_role_user
+		(Sys_User_id,Sys_Role_id)
+		values
+		(#{Sys_User_id},#{glylx})
+	</insert>
+
+    <update id="updateGlyUser">
+        update sys_user set
+        password=#{password},username=#{username},glylx=#{glylx}
+        where id=#{id}
+    </update>
+    <update id="updateGlyRole">
+        update sys_role_user set
+       Sys_Role_id=#{glylx}
+        where Sys_User_id=#{Sys_User_id}
+    </update>
+
+    <delete id="deleteGlyUser" parameterType="Integer">
+     	delete from sys_user where id= #{id}
+	</delete>
+    <delete id="deleteGlyRole" parameterType="Integer">
+     	delete from sys_role_user where Sys_User_id= #{id}
+	</delete>
+<!--管理员，end-->
 </mapper>

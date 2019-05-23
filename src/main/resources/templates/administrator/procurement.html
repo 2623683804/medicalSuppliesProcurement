@@ -3,27 +3,35 @@
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	<head>
 		<meta charset="UTF-8">
-		<title>海马采购信息管理 - 海马官网</title>
+		<title>海马采购发布管理 - 海马官网</title>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" th:href="@{css/commonn.css}" />
-		<link rel="stylesheet" th:href="@{css/base.css}" />
-		<link rel="stylesheet" th:href="@{css/pop.css}" />
-		<script type="text/javascript" th:src="@{js/jquery-3.2.1.min.js}" ></script>
-		<script type="text/javascript" th:src="@{js/account.js}" ></script>
-
+		<link rel="stylesheet" th:href="@{/css/commonn.css}" />
+		<link rel="stylesheet" th:href="@{/css/base.css}" />
+		<link rel="stylesheet" th:href="@{/css/pop.css}" />
+		<script type="text/javascript" th:src="@{/js/jquery-3.2.1.min.js}" ></script>
+		<script type="text/javascript" th:src="@{/js/account.js}" ></script>
+        <script type="text/javascript">
+            function updateMed(a){
+                //可正常赋值
+                $("#yid").attr("value",a);
+            }
+        </script>
 	</head>
 
 	<body>
-		
+        <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+            <div th:include="common/header_xt" ></div>
+        </div>
+        <div sec:authorize="hasRole('ROLE_CGGLY')"> <!-- 用户类型为ROLE_CGGLY 显示 -->
+            <div th:include="common/header_cx" ></div>
+        </div>
 		<div class="wrap">
 			<!--内容开始-->
 			<div class="containermcompany">
 				<div class="width-wrap white-bg add-border cl">
 					<div class="title">
-						<h3>采购信息管理<a id="tjcgxx" href="#" class="button1 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
-						
+						<h3>采购发布管理<a id="tjcgxx" href="#" class="button7 green-button mb" style="text-decoration: none;float: right">添加</a></h3>
 					</div>
-
 			<!--筛选开始-->
                 <form>
 					<div class="form-wrap-5" id="divCompanyInfo">
@@ -99,8 +107,7 @@
                         <tbody class="recordLists">
     
 					    <tr class="drdc">
-					       
-					        
+
 					        <td class="align-center">111</td>
 					        <td class="align-center relative">
 					            <em class="fs1">针管</em>
@@ -127,8 +134,8 @@
 					        	<em class="fs2 font-pro">2015-11-03</em>
 					        </td>
 					        <td class="align-center">
-					        	<input id="xgcgxx" type="button" class="button2 mb" value="修改" />
-					         	<input type="button" class="button mb" value="删除" />			            
+					        	<input id="xgcgxx" th:onclick="'javascript:updateMed(\''+${SysUser.id}+'\');'"  type="button" class="button2 mb" value="修改" />
+					         	<input class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deleteMedical/'+${MedicalInformation.id}}" />
 					            	
 					        </td>
 					    </tr>
@@ -136,26 +143,26 @@
 					</table>
 				        </div>
 				        <!--列表结束-->
-				        <!--翻页开始-->
-				        <div class="paging-box">
-				        	<div class="paging align-right sz14">
-				        		<a class="ky_pre_page" href="javascript:void(0);">
-				        			<i class="common-icon-New pre-icon"></i>
-				        		</a>
-				        	<a href="javascript:void(0);" class="a">1</a>
-				        	<a href="javascript:void(0);">2</a>
-				        	<a href="javascript:void(0);">3</a>
-				        	<a href="javascript:void(0);">4</a>
-				        	<a href="javascript:void(0);">5</a>
-				        	<span>...</span>
-				        	<a href="javascript:void(0);">8</a>
-				        	<a href="javascript:void(0);">9</a>
-				        	<a href="#" class="ky_next_page delmr">
-				        		<i class="common-icon-New pre-icon flipx"></i>
-				        	</a>
-				        	</div>
-				        </div>
-				        <!--翻页结束-->
+                    <!--翻页开始-->
+                    <div class=" split-line mt mb"></div>
+                    <div style="text-align:center;font-size: 15px">
+                        <label>第<span th:text="${jq.p}"></span>/<span th:text="${jq.totolPage}"></span>页   共<span th:text="${jq.total}"></span>条</label>
+                        <a th:href="@{/administrator/medicalsupplies(p = 1,user_id=${user_id},name=${name},status=${status})}" type="button" role=button class="button green-button mb">首页</a>
+                        <a th:if="${jq.p > 1}" th:href="@{/administrator/medicalsupplies(p=${jq.p - 1},user_id=${user_id},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">上一页</a>
+                        <a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
+                        <a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/medicalsupplies(p=${jq.p + 1},user_id=${user_id},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">下一页</a>
+                        <a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+                        <a th:href="@{/administrator/medicalsupplies(p=${jq.totolPage},user_id=${user_id},name=${name},status=${status})}" type="button" role=button class="button green-button mb">尾页</a>
+                        <form action="/administrator/medicalsupplies" method="get" style="margin:0px;display:inline;">
+                            跳转到: <input type="text" style="width: 30px" name="p" />页
+                            <!--(user_id=${user_id},name=${name},status=${status})-->
+                            <input type="hidden"  name="name" th:value="${name}"/>
+                            <input type="hidden"  name="user_id" th:value="${user_id}"/>
+                            <input type="hidden"  name="status" th:value="${status}"/>
+                            <input type="submit" value="跳转" class="button green-button mb"/>
+                        </form>
+                    </div>
+                    <!--翻页结束-->
 				    </div>
 					<!--右侧内容结束-->
 
@@ -168,7 +175,7 @@
 		<a href="javascript:void(0);" class="right-wrap" id="right-wrap5">
 			<i class="common-icon close-icon"></i>
 		</a>
-		<h3>添加采购信息</h3>
+		<h3>添加采购发布信息</h3>
 	</div>
 	<div class="pop-pay">
 		<form>
@@ -216,5 +223,5 @@
 </div>
 <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 	</body>
-		<script type="text/javascript" th:src="@{js/core.js}"></script>
+		<script type="text/javascript" th:src="@{/js/core.js}"></script>
 </html>
