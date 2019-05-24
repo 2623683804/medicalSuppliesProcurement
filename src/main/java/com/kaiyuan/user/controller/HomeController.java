@@ -84,10 +84,10 @@ public class HomeController {
         return "administrator/approval";
     }
 
-    @RequestMapping("/administrator/procurement")
-    public String procurement(){
-        return "administrator/procurement";
-    }
+//    @RequestMapping("/administrator/procurement")
+//    public String procurement(){
+//        return "administrator/procurement";
+//    }
 
 
 

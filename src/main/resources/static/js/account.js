@@ -85,9 +85,9 @@ $(document).ready(function(){
 		   $("#pop-wrap4").css("display","none");
 		   $(".pop-mask").css("display","none");
 		});
-		
-		
-	$('#xgcgxx').click(function(){
+
+
+	$('.xgcgxx').click(function(){
         if($("#pop-wrap5").css('display')=='none'){
             $("#pop-wrap5").css("display","block");
             $(".pop-mask").css("display","block");

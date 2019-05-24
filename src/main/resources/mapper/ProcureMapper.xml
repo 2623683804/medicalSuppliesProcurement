@@ -1,7 +1,60 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="user">
+<mapper namespace="com.kaiyuan.management.dao.ProcureMapper">
 
+    <select id="querymMedName" parameterType="String" resultType="com.kaiyuan.management.entity.MedicalInformation"  >
+        select name from medical_information
+    </select>
 
+    <select id="queryCount" resultType="java.lang.Integer">
+        select count(ms.id)
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where  1=1
+        <if test="status!=null and status!=''">and ms.status =#{status}</if>
+        <if test="name!=null and name!=''">and mi.name like concat('%',#{name},'%')</if>
+        <if test="delivery_time!=null and delivery_time!=''">and ms.delivery_time = #{delivery_time}</if>
+    </select>
+
+    <select id="queryfyList" parameterType="String"  resultType="com.kaiyuan.management.entity.CustomMedicasupplies">
+        select ms.id,ms.number,ms.rel_quotation,ms.sup_quotation,ms.delivery_time,ms.user_id,ms.status as medic_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where  1=1
+        <if test="status!=null and status!=''">and ms.status =#{status}</if>
+        <if test="name!=null and name!=''">and mi.name like concat('%',#{name},'%')</if>
+        <if test="delivery_time!=null and delivery_time!=''">and ms.delivery_time = #{delivery_time}</if>
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
+
+    <insert id="addMedicalInformation">
+		insert into medica_supplies(medtion_id,status,number,rel_quotation,delivery_time,user_id) values (#{medtion_id},#{status},#{number},#{rel_quotation},#{delivery_time},#{user_id})
+	</insert>
+    <select id="medicalInfoId" resultType="java.lang.Integer">
+        select id from medical_information where name = #{name}
+    </select>
+
+    <update id="updateMedicaSupplies">
+		update medica_supplies
+		set
+		medtion_id=#{medtion_id},
+		user_id=#{user_id},
+		rel_quotation=#{rel_quotation},
+		number=#{number},
+		delivery_time=#{delivery_time}
+		where id=#{id}
+	</update>
+
+    <update id="deleteMedicaSupplies" parameterType="Integer">
+     	update medica_supplies set status = 2 where id= #{id}
+	</update>
+    <update id="deleteMedicaSupplies" parameterType="Integer">
+     	update medica_supplies set status = 2 where id= #{id}
+	</update>
+    <update id="updateStatus" parameterType="Integer">
+     	update medica_supplies set status = 4 where id= #{id}
+	</update>
 </mapper>
