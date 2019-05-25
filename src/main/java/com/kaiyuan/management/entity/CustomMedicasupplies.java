@@ -10,11 +10,11 @@ public class CustomMedicasupplies {
     private String sup_quotation;
     private String delivery_time;
     private String user_id;
-
+    private String relese_time;
     public CustomMedicasupplies() {
     }
 
-    public CustomMedicasupplies(Integer id, String name, String meinfo_status, String medic_status, String number, String rel_quotation, String sup_quotation, String delivery_time, String user_id) {
+    public CustomMedicasupplies(Integer id, String name, String meinfo_status, String medic_status, String number, String rel_quotation, String sup_quotation, String delivery_time, String user_id, String relese_time) {
         this.id = id;
         this.name = name;
         this.meinfo_status = meinfo_status;
@@ -24,6 +24,7 @@ public class CustomMedicasupplies {
         this.sup_quotation = sup_quotation;
         this.delivery_time = delivery_time;
         this.user_id = user_id;
+        this.relese_time = relese_time;
     }
 
     public Integer getId() {
@@ -98,6 +99,14 @@ public class CustomMedicasupplies {
         this.user_id = user_id;
     }
 
+    public String getRelese_time() {
+        return relese_time;
+    }
+
+    public void setRelese_time(String relese_time) {
+        this.relese_time = relese_time;
+    }
+
     @Override
     public String toString() {
         return "CustomMedicasupplies{" +
@@ -110,6 +119,7 @@ public class CustomMedicasupplies {
                 ", sup_quotation='" + sup_quotation + '\'' +
                 ", delivery_time='" + delivery_time + '\'' +
                 ", user_id='" + user_id + '\'' +
+                ", relese_time='" + relese_time + '\'' +
                 '}';
     }
 }

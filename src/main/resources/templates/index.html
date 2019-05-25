@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title>首页 - 海马医疗耗材采购官网</title>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
-		<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}">
 		<link rel="stylesheet" type="text/css"th:href="@{css/index.css}" />
 		<link rel="stylesheet" th:href="@{css/commonn.css}" />
 		<link rel="stylesheet" th:href="@{css/base.css}" />
@@ -92,90 +92,40 @@
 			</div>
 		</div>
 		<!--banner，开始-->
+	<!--信息开始-->
+	<table class="table table-striped table-bordered table-hover table-condensed">
+		<caption style="text-align:right"><a th:href="@{/deliverinform}">--查看更多</a></caption>
+		<tr class="info">
+			<td>编号</td>
+			<td>医用耗材名称</td>
+			<td>类型</td>
+			<td>价格</td>
+			<td>采购数量</td>
+			<td>交付截止时间</td>
+			<td></td>
+		</tr>
+
+		<tr th:each="CustomMedicasupplies : ${jq.rows}">
+			<td th:text="${CustomMedicasupplies.id}">5</td>
+			<td th:text="${CustomMedicasupplies.name}">纱布</td>
+			<td th:text="${CustomMedicasupplies.meinfo_status}">一次性消耗品</td>
+			<td th:text="${CustomMedicasupplies.rel_quotation}">4000</td>
+			<td th:text="${CustomMedicasupplies.number}">200</td>
+			<td th:text="${CustomMedicasupplies.delivery_time}">2019-06-05</td>
+			<td width="5%">
+				<a  class="btn btn-primary">申请</a>
+                <!--th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}"th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}"-->
+			</td>
+		</tr>
+	</table>
+	<!--信息结束-->
+
 
 		<!--滚视差-->
 		<div class="scaleIndexBg scaleIndex "></div>
 		
 		<!--底部，开始-->
-		<div class="footer">
-			<div class="width-wrap">
-				<div class="footer-top cl">
-					<div class="foot-topL cl">
-						<dl>
-							<dt>关于我们</dt>
-							<dd>
-								<a href="#" style="cursor:default">关于平台</a>
-							</dd>
-							<dd>
-								<a href="#" style="cursor:default">团队介绍</a>
-							</dd>
-							<dd>
-								<a href="#" style="cursor:default">集团背景</a>
-							</dd>
-							<dd>
-								<a href="#" style="cursor:default">隐私政策</a>
-							</dd>
-						</dl>
-						<dl>
-							<dt>产品服务</dt>
-							<dd>
-								<a href="#" style="cursor:default">联系我们</a>
-							</dd>
-						</dl>
-						<dl class="delmr">
-							<dt>安全保障</dt>
-							<dd>
-								<a href="#" style="cursor:default">平台数据</a>
-							</dd>
-							<dd>
-								<a href="#" style="cursor:default">风险管理</a>
-							</dd>
-							<dd>
-								<a href="#" style="cursor:default">法律法规</a>
-							</dd>
-						</dl>
-					</div>
-					<div class="foot-topC ">
-						<div class="cl">
-							<ul>
-								<li>微信订阅号</li>
-								<li><img th:src="@{img/weixin.png}"></li>
-							</ul>
-							<ul>
-								<li>微信服务号</li>
-								<li><img th:src="@{img/fuwuhao.png}"></li>
-							</ul>
-							<ul>
-								<li>
-									<a href="https://weibo.com/bhuers" rel="nofollow" target="_blank">
-										官方微博<i class="common-icon-New goTo-icon"></i>
-									</a>
-								</li>
-								<li>
-									<a href="https://weibo.com/bhuers" rel="nofollow" target="_blank">
-										<img th:src="@{img/weibo.png}">
-									</a>
-								</li>
-							</ul>
-						</div>
-						<div>
-							<p><i class="common-icon-New tlogo-icon"></i>海马医疗耗材采购官网</p>
-						</div>
-					</div>
-					<div class="foot-topR">
-						<h3>400 100 8899</h3>
-						<p>服务时间：08:00-20:00</p>
-						<p>电子邮件：kefu@haima.com</p>
-					</div>
-				</div>
-				<div class="footer-copyright">
-					<div class="footer-copyrightText">
-						<span>Copyright© 2019 海马科技有限公司 版权所有</span>
-						<a href="#" style="cursor:default">增值电信业务经营许可证 ：冀B2-20164466</a> 冀ICP备15017012号
-					</div>
-				</div>
-			</div>
-		</div>
+        <div th:include="common/footer" ></div>
 		<!--底部结束-->
 	</body>
 		<script type="text/javascript" th:src="@{js/core.js}" ></script>

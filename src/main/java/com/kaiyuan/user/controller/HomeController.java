@@ -4,6 +4,8 @@ package com.kaiyuan.user.controller;
 import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.management.service.MedicalInformationServiceImpl;
+import com.kaiyuan.management.service.ProcureService;
+import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.entity.Msg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,14 +18,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private MedicalInformationServiceImpl medicalInformationServiceImpl;
+    @Resource
+    private ProcureService procureService;
+
 
     @RequestMapping("/")
     public String indexL(Model model){
@@ -36,7 +42,10 @@ public class HomeController {
 //        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //    }
     @RequestMapping("/index")
-    public String index(){
+    public String index(Model model){
+        Map<String, Object> map = new HashMap<String, Object>();
+        JqGridReturn jq = procureService.queryIndex(map);
+        model.addAttribute("jq",jq);
         return "index";
     }
 
@@ -84,24 +93,7 @@ public class HomeController {
         return "administrator/approval";
     }
 
-//    @RequestMapping("/administrator/procurement")
-//    public String procurement(){
-//        return "administrator/procurement";
-//    }
 
-
-
-//    @RequestMapping("/administrator/gldministrator")
-//    public String gldministrator(){
-//        return "administrator/gldministrator";
-//    }
-//
-//
-//    @RequestMapping("/administrator/supplier")
-//    public String supplier(){
-//        return "administrator/supplier";
-//    }
-//
 
 
     @RequestMapping("/usermanagement/purchasingrecords")

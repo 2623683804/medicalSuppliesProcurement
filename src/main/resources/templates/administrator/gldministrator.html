@@ -110,8 +110,8 @@
 						<a th:href="@{/administrator/gldministrator(p = 1,username=${username},glyLx=${glyLx})}" type="button" role=button class="button green-button mb">首页</a>
 						<a th:if="${jq.p > 1}" th:href="@{/administrator/gldministrator(p=${jq.p - 1},username=${username},glyLx=${glyLx})}"  type="button" role=button class="button green-button mb">上一页</a>
 						<a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
-						<a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
-						<a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/gldministrator(p=${jq.p + 1},username=${username},glyLx=${glyLx})}"  type="button" role=button class="button green-button mb">下一页</a>
+						<a th:if="${jq.p != jq.totolPage}"  type="button" class="button green-button mb">下一页</a>
+						<a th:if="${jq.p == jq.totolPage}" th:href="@{/administrator/gldministrator(p=${jq.p + 1},username=${username},glyLx=${glyLx})}"  type="button" role=button class="button green-button mb">下一页</a>
 
 						<a th:href="@{/administrator/gldministrator(p=${jq.totolPage},username=${username},glyLx=${glyLx})}" type="button" role=button class="button green-button mb">尾页</a>
 

@@ -35,7 +35,7 @@ public class ProcureController {
 //        return sjm;
 //    }
 
-    // 进入到医用品页面的初始化
+    // 进入到采购发布页面的初始化
     @GetMapping("/administrator/procurement")
     public String medicalsupplies(Model model, HttpServletRequest request){
         String p = request.getParameter("p");
@@ -117,5 +117,44 @@ public class ProcureController {
         procureService.updateStatus(id);
         return new ModelAndView("redirect:/administrator/procurement");//重定向到list页面
     }
+    @RequestMapping("/updateStatusFb/{id}")
+    public ModelAndView updateStatusFb(@PathVariable("id") Integer id) {
+        procureService.updateStatusFb(id);
+        return new ModelAndView("redirect:/administrator/procurement");//重定向到list页面
+    }
 
+    // 进入到发布信息页面的初始化
+    @GetMapping("/deliverinform")
+    public String deliverinform(Model model, HttpServletRequest request){
+        String p = request.getParameter("p");
+        logger.info("p="+p);
+        Integer start;
+        if (null == p){
+            start=null;
+        }else {
+            start = Integer.parseInt(p);
+        }
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (start!=null) {
+            if (start<=0) {
+                start=1;
+            }
+            map.put("start", (start-1)*10);
+        }else{
+            map.put("start", 0);
+        }
+
+        String name = request.getParameter("name");
+        map.put("name",name);
+        map.put("p",p);
+        JqGridReturn jq = procureService.selectfbList(map);
+        if (null == p){
+            logger.info("p=null");
+        }else {
+            jq.setP(Integer.parseInt(p));
+        }
+
+        model.addAttribute("jq",jq);
+        return "deliverinform";
+    }
 }

@@ -24,4 +24,14 @@ public interface ProcureService {
     boolean deleteMedicaSupplies(Integer id);
 
     boolean updateStatus(Integer id);
+
+    boolean updateStatusFb(Integer id);
+
+    int queryfbCount(Map<String, Object> map);
+
+    List<CustomMedicasupplies> queryfbList(Map<String, Object> map);
+
+    JqGridReturn selectfbList(Map<String, Object> map);
+
+    JqGridReturn queryIndex(Map<String, Object> map);
 }

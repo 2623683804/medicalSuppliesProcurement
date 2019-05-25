@@ -1732,6 +1732,29 @@ label {
  -webkit-transition-duration:.4s;
  -o-transition-duration:.4s
 }
+.input-text10,
+.textarea-wrap {
+ background:#fff;
+ padding:0 12px;
+ color:#333;
+ border:1px solid #d3d8dd;
+ height:35px;
+ line-height:44px;
+ -webkit-border-radius:2px;
+ -moz-border-radius:2px;
+ border-radius:2px;
+ -moz-box-shadow:0 2px 0 rgba(0,0,0,.05) inset;
+ -webkit-box-shadow:0 2px 0 rgba(0,0,0,.05) inset;
+ box-shadow:0 2px 0 rgba(0,0,0,.05) inset;
+ -webkit-transition:all .3s linear 0s;
+ -o-transition:all .3s linear 0s;
+ -moz-transition:all .3s linear 0s;
+ transition:all .3s linear 0s;
+ transition-duration:.4s;
+ -moz-transition-duration:.4s;
+ -webkit-transition-duration:.4s;
+ -o-transition-duration:.4s
+}
 .input-text1,
 .textarea-wrap {
  background:#fff;
@@ -2782,7 +2805,7 @@ label {
  background:#1d2334
 }
 .footer-top {
- padding:52px 0 70px;
+ padding:28px 0 20px;
  border-bottom:1px solid #2f374c
 }
 .foot-topL {

@@ -1,5 +1,9 @@
 package com.kaiyuan.management.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class Medicasupplies {
     private Integer id;
     private Integer medtion_id;
@@ -7,13 +11,15 @@ public class Medicasupplies {
     private String number;
     private String rel_quotation;
     private String sup_quotation;
-    private String delivery_time;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date delivery_time;
     private String user_id;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date relese_time;
     public Medicasupplies() {
     }
 
-    public Medicasupplies(Integer id, Integer medtion_id, String status, String number, String rel_quotation, String sup_quotation, String delivery_time, String user_id) {
+    public Medicasupplies(Integer id, Integer medtion_id, String status, String number, String rel_quotation, String sup_quotation, Date delivery_time, String user_id, Date relese_time) {
         this.id = id;
         this.medtion_id = medtion_id;
         this.status = status;
@@ -22,6 +28,7 @@ public class Medicasupplies {
         this.sup_quotation = sup_quotation;
         this.delivery_time = delivery_time;
         this.user_id = user_id;
+        this.relese_time = relese_time;
     }
 
     public Integer getId() {
@@ -72,11 +79,11 @@ public class Medicasupplies {
         this.sup_quotation = sup_quotation;
     }
 
-    public String getDelivery_time() {
+    public Date getDelivery_time() {
         return delivery_time;
     }
 
-    public void setDelivery_time(String delivery_time) {
+    public void setDelivery_time(Date delivery_time) {
         this.delivery_time = delivery_time;
     }
 
@@ -88,6 +95,14 @@ public class Medicasupplies {
         this.user_id = user_id;
     }
 
+    public Date getRelese_time() {
+        return relese_time;
+    }
+
+    public void setRelese_time(Date relese_time) {
+        this.relese_time = relese_time;
+    }
+
     @Override
     public String toString() {
         return "Medicasupplies{" +
@@ -97,8 +112,9 @@ public class Medicasupplies {
                 ", number='" + number + '\'' +
                 ", rel_quotation='" + rel_quotation + '\'' +
                 ", sup_quotation='" + sup_quotation + '\'' +
-                ", delivery_time='" + delivery_time + '\'' +
+                ", delivery_time=" + delivery_time +
                 ", user_id='" + user_id + '\'' +
+                ", relese_time=" + relese_time +
                 '}';
     }
 }

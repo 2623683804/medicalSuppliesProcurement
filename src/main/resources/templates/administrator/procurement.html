@@ -59,9 +59,9 @@
 					            <select name="status" class="input-text input-text-long1 left-wrap"> <!--0草稿  1已删除  2已提交（待审批）  3审批通过   4审批不通过-->
 									<option value="">请选择</option>
                                     <option value="1">草稿</option>
-                                    <option value="2">已删除</option>
-									<option value="3">已发布</option>
-									<option value="4">已失效</option>
+                                    <option value="2">已发布</option>
+									<option value="3">已失效</option>
+									<option value="4">已删除</option>
 								</select> 
 							</div>
 						</div>
@@ -88,7 +88,7 @@
                                 <th class="align-center" width="60">发布状态</th>
                                 <th class="align-center" width="50">操作人</th>
                                 <th class="align-center" width="100">交付时间</th>
-                                <th class="align-center" width="120">操作</th>
+                                <th class="align-center" width="140">操作</th>
                             </tr>
                         </thead>
                         <tbody class="recordLists">
@@ -97,35 +97,36 @@
                                 <td class="align-center relative"th:text="${CustomMedicasupplies.name}" ></td>
                                 <td class="align-center font-pro relative" th:text="${CustomMedicasupplies.meinfo_status}"></td>
                                 <td class="align-center font-pro relative" th:text="${CustomMedicasupplies.rel_quotation}"></td>
-                                <td class="align-centert" th:text="${CustomMedicasupplies.number}"></td>
+                                <td class="align-center" th:text="${CustomMedicasupplies.number}"></td>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 1">
                                     <td class="align-center" >草稿</td>
                                 </div>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 2">
-                                    <td class="align-center" >已删除</td>
-                                </div>
-                                <div th:if="${CustomMedicasupplies.medic_status} == 3">
                                     <td class="align-center" >已发布</td>
                                 </div>
-                                <div th:if="${CustomMedicasupplies.medic_status} == 4">
+
+                                <div th:if="${CustomMedicasupplies.medic_status} == 3">
                                     <td class="align-center" >已失效</td>
                                 </div>
-                                <td class="align-centert" th:text="${CustomMedicasupplies.user_id}"></td>
+                                <div th:if="${CustomMedicasupplies.medic_status} == 4">
+                                    <td class="align-center" >已删除</td>
+                                </div>
+                                <td class="align-center" th:text="${CustomMedicasupplies.user_id}"></td>
                                 <td class="align-center" th:text="${CustomMedicasupplies.delivery_time}"></td>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 1">
                                     <td class="align-center">
-                                        <input th:onclick="'javascript:updateMed(\''+${CustomMedicasupplies.id}+'\');'"  type="button" class="xgcgxx button2 mb" value="修改" />
+										<a class="button green-button mb" onclick="return confirm('您确定要发布吗？')" th:href="@{'/updateStatusFb/'+${CustomMedicasupplies.id}}" >发布</a>
+										<input th:onclick="'javascript:updateMed(\''+${CustomMedicasupplies.id}+'\');'"  type="button" class="xgcgxx button2 mb" value="修改" />
                                         <a class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deletemedicalsupplies/'+${CustomMedicasupplies.id}}" >删除</a>
                                     </td>
                                 </div>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 2">
-                                    <td class="align-center">--</td>
+                                    <td class="align-center">
+                                        <a class="button mb" onclick="return confirm('您确定要下线吗？')" th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}" >下线</a>
+                                    </td>
                                 </div>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 3">
-                                    <td class="align-center">
-                                        <a class="button mb" onclick="return confirm('您确定要下线吗？')" th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}" >删除</a>
-                                    </td>
-
+                                    <td class="align-center">--</td>
                                 </div>
                                 <div th:if="${CustomMedicasupplies.medic_status} == 4">
                                     <td class="align-center">--</td>
@@ -142,8 +143,8 @@
                         <a th:href="@{/administrator/procurement(p = 1,delivery_time=${delivery_time},name=${name},status=${status})}" type="button" role=button class="button green-button mb">首页</a>
                         <a th:if="${jq.p > 1}" th:href="@{/administrator/procurement(p=${jq.p - 1},delivery_time=${delivery_time},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">上一页</a>
                         <a th:if="${jq.p <= 1}" class="button green-button mb">上一页</a>
-                        <a th:if="${jq.p < jq.pageSize}" th:href="@{/administrator/procurement(p=${jq.p + 1},delivery_time=${delivery_time},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">下一页</a>
-                        <a th:if="${jq.p = jq.pageSize}"  type="button" class="button green-button mb">下一页</a>
+                        <a th:if="${jq.p != jq.totolPage}" th:href="@{/administrator/procurement(p=${jq.p + 1},delivery_time=${delivery_time},name=${name},status=${status})}"  type="button" role=button class="button green-button mb">下一页</a>
+                        <a th:if="${jq.p == jq.totolPage}"  type="button" class="button green-button mb">下一页</a>
                         <a th:href="@{/administrator/procurement(p=${jq.totolPage},delivery_time=${delivery_time},name=${name},status=${status})}" type="button" role=button class="button green-button mb">尾页</a>
                         <form action="/administrator/procurement" method="get" style="margin:0px;display:inline;">
                             跳转到: <input type="text" style="width: 30px" name="p" />页
@@ -161,7 +162,7 @@
 
 				</div>
 			</div>
-			
+        <div th:include="common/footer" ></div>
 <div class="pop-wrap" id="pop-wrap5" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
 	<div class="pop-title">
 		<a href="javascript:void(0);" class="right-wrap" id="right-wrap5">
@@ -208,7 +209,7 @@
 					交付时间：
 				</div>
 				<div class="control-input select-small control-text lh40 relative1 cl">
-					<input type="text" placeholder="采购数量" name="delivery_time" class=" input-text input-text-long1 left-wrap input-company-name">
+					<input type="text" placeholder="交付时间 2019-05-16" name="delivery_time" class=" input-text input-text-long1 left-wrap input-company-name">
 				</div>
 			</div>
 			<div align="center">

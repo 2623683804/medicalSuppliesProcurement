@@ -25,6 +25,7 @@
         <if test="status!=null and status!=''">and ms.status =#{status}</if>
         <if test="name!=null and name!=''">and mi.name like concat('%',#{name},'%')</if>
         <if test="delivery_time!=null and delivery_time!=''">and ms.delivery_time = #{delivery_time}</if>
+        ORDER BY ms.status
         <if test="start!=null">
             limit #{start} ,10
         </if>
@@ -49,12 +50,50 @@
 	</update>
 
     <update id="deleteMedicaSupplies" parameterType="Integer">
-     	update medica_supplies set status = 2 where id= #{id}
-	</update>
-    <update id="deleteMedicaSupplies" parameterType="Integer">
-     	update medica_supplies set status = 2 where id= #{id}
-	</update>
-    <update id="updateStatus" parameterType="Integer">
      	update medica_supplies set status = 4 where id= #{id}
 	</update>
+    <!--<update id="deleteMedicaSupplies" parameterType="Integer">-->
+     	<!--update medica_supplies set status = 2 where id= #{id}-->
+	<!--</update>-->
+    <update id="updateStatus" parameterType="Integer">
+     	update medica_supplies set status = 3 where id= #{id}
+	</update>
+    <update id="updateStatusFb" parameterType="Integer">
+     	update medica_supplies set status = 2 where id= #{id}
+	</update>
+
+
+    <select id="queryfbCount" resultType="java.lang.Integer">
+        select count(ms.id)
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where  1=1
+        and ms.status =2
+        <if test="name!=null and name!=''">and mi.name like concat('%',#{name},'%')</if>
+    </select>
+
+    <select id="queryfbList" parameterType="String"  resultType="com.kaiyuan.management.entity.CustomMedicasupplies">
+        select ms.relese_time,ms.id,ms.number,ms.rel_quotation,ms.sup_quotation,ms.delivery_time,ms.user_id,ms.status as medic_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where  1=1
+        and ms.status =2
+        <if test="name!=null and name!=''">and mi.name like concat('%',#{name},'%')</if>
+        ORDER BY ms.relese_time
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
+
+    <select id="queryIndex" parameterType="String"  resultType="com.kaiyuan.management.entity.CustomMedicasupplies">
+        select ms.relese_time,ms.id,ms.number,ms.rel_quotation,ms.sup_quotation,ms.delivery_time,ms.user_id,ms.status as medic_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where  1=1
+        and ms.status =2
+        ORDER BY ms.relese_time
+        limit  5
+
+    </select>
+
 </mapper>

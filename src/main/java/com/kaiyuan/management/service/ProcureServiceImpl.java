@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +54,8 @@ public class ProcureServiceImpl implements ProcureService{
     @Override
     public boolean addMedicalInformation(Medicasupplies medicasupplies,String name){
         medicasupplies.setMedtion_id(procureMapper.medicalInfoId(name));
+        Date date=new Date();
+        medicasupplies.setRelese_time(date);
         return procureMapper.addMedicalInformation(medicasupplies);
     }
 
@@ -72,5 +75,45 @@ public class ProcureServiceImpl implements ProcureService{
         //
         return procureMapper.updateStatus(id);
     }
+    @Override
+    public boolean updateStatusFb(Integer id){
+        //
+        return procureMapper.updateStatusFb(id);
+    }
 
+    @Override
+    public int queryfbCount(Map<String, Object> map) {
+        return procureMapper.queryfbCount(map);
+    }
+
+    @Override
+    public List<CustomMedicasupplies> queryfbList(Map<String, Object> map) {
+        return procureMapper.queryfbList(map);
+    }
+
+    /**
+     * 分页查询
+     * @return
+     */
+    @Override
+    public JqGridReturn selectfbList(Map<String, Object> map){
+
+        List<CustomMedicasupplies> list=procureMapper.queryfbList(map);
+        JqGridReturn jq=new JqGridReturn();
+        jq.setRows(list);
+        jq.setTotal(queryfbCount(map));
+        jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
+        return jq;
+
+    }
+
+    @Override
+    public JqGridReturn queryIndex(Map<String, Object> map){
+
+        List<CustomMedicasupplies> list=procureMapper.queryfbList(map);
+        JqGridReturn jq=new JqGridReturn();
+        jq.setRows(list);
+        return jq;
+
+    }
 }

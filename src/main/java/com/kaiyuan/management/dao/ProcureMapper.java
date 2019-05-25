@@ -26,4 +26,13 @@ public interface ProcureMapper {
     boolean deleteMedicaSupplies(Integer id);
 
     boolean updateStatus(Integer id);
+    boolean updateStatusFb(Integer id);
+
+    //根据条件查询总条数
+    int queryfbCount(Map<String, Object> map);
+
+    //根据条件分页
+    List<CustomMedicasupplies> queryfbList(Map<String, Object> map);
+
+    List<CustomMedicasupplies> queryIndex(Map<String, Object> map);
 }
