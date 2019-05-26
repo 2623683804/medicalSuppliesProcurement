@@ -7,21 +7,19 @@ public class CustomMedicasupplies {
     private String medic_status;
     private String number;
     private String rel_quotation;
-    private String sup_quotation;
     private String delivery_time;
     private String user_id;
     private String relese_time;
     public CustomMedicasupplies() {
     }
 
-    public CustomMedicasupplies(Integer id, String name, String meinfo_status, String medic_status, String number, String rel_quotation, String sup_quotation, String delivery_time, String user_id, String relese_time) {
+    public CustomMedicasupplies(Integer id, String name, String meinfo_status, String medic_status, String number, String rel_quotation, String delivery_time, String user_id, String relese_time) {
         this.id = id;
         this.name = name;
         this.meinfo_status = meinfo_status;
         this.medic_status = medic_status;
         this.number = number;
         this.rel_quotation = rel_quotation;
-        this.sup_quotation = sup_quotation;
         this.delivery_time = delivery_time;
         this.user_id = user_id;
         this.relese_time = relese_time;
@@ -75,14 +73,6 @@ public class CustomMedicasupplies {
         this.rel_quotation = rel_quotation;
     }
 
-    public String getSup_quotation() {
-        return sup_quotation;
-    }
-
-    public void setSup_quotation(String sup_quotation) {
-        this.sup_quotation = sup_quotation;
-    }
-
     public String getDelivery_time() {
         return delivery_time;
     }
@@ -116,7 +106,6 @@ public class CustomMedicasupplies {
                 ", medic_status='" + medic_status + '\'' +
                 ", number='" + number + '\'' +
                 ", rel_quotation='" + rel_quotation + '\'' +
-                ", sup_quotation='" + sup_quotation + '\'' +
                 ", delivery_time='" + delivery_time + '\'' +
                 ", user_id='" + user_id + '\'' +
                 ", relese_time='" + relese_time + '\'' +

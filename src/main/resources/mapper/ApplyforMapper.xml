@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaiyuan.management.dao.ApplyforMapper">
+
+    <select id="queryApplyfor" parameterType="java.lang.Integer"  resultType="com.kaiyuan.management.entity.CustomMedicasupplies">
+        select ms.id,ms.number,ms.rel_quotation,ms.sup_quotation,ms.delivery_time,ms.user_id,ms.status as medic_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        where 1=1 and ms.id= #{id}
+    </select>
+
+    <select id="queryCompanyName" parameterType="String" resultType="String">
+      select companyName
+      from supplie_details
+      where
+      gysid=( select gysid from sys_user where username=#{username})
+
+    </select>
+
+    <insert id="addPurApp">
+        insert into purchasing_application
+        (mesu_id,companyName,gysmoney,status,create_time)
+        value
+        (#{mesu_id},#{companyName},#{gysmoney},0,#{create_time})
+    </insert>
+
+    <select id="queryGysAppCount" resultType="java.lang.Integer">
+        select count(pa.id)
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
+        where  1=1
+        <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
+        <if test="status!=null and status!=''">and pa.status = #{status}</if>
+    </select>
+
+    <select id="queryGysApplication" parameterType="String"  resultType="com.kaiyuan.management.entity.SupplierApplication">
+        select pa.id,ms.number,ms.rel_quotation,pa.gysmoney,ms.delivery_time,pa.status as purapp_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
+        where  1=1
+        <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
+        <if test="status!=null and status!=''">and pa.status = #{status}</if>
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
+
+</mapper>

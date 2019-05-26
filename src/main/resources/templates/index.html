@@ -113,8 +113,7 @@
 			<td th:text="${CustomMedicasupplies.number}">200</td>
 			<td th:text="${CustomMedicasupplies.delivery_time}">2019-06-05</td>
 			<td width="5%">
-				<a  class="btn btn-primary">申请</a>
-                <!--th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}"th:href="@{'/updateStatus/'+${CustomMedicasupplies.id}}"-->
+				<a th:href="@{'/applyfor/' +${CustomMedicasupplies.id}}"  class="btn btn-primary">申请</a>
 			</td>
 		</tr>
 	</table>
