@@ -18,9 +18,16 @@ public interface ApplyforMapper {
 
     String queryCompanyName(String username);
 
-    //根据条件查询总条数
     int queryGysAppCount(Map<String, Object> map);
-
-    //根据条件分页
     List<SupplierApplication> queryGysApplication(Map<String, Object> map);
+
+    boolean updateApplyfor(PurchasingApplication purchasingApplication);
+    boolean updateStatusSC(Integer id);
+    boolean updateStatusTJ(Integer id);
+    boolean updateStatusBTG(Integer id);
+    boolean updateStatusTG(Integer id);
+
+    int querySpCount(Map<String, Object> map);
+    List<SupplierApplication> querySpFy(Map<String, Object> map);
+
 }

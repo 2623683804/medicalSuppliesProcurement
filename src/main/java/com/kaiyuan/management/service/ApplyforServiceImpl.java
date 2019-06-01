@@ -1,9 +1,7 @@
 package com.kaiyuan.management.service;
 
 import com.kaiyuan.management.dao.ApplyforMapper;
-import com.kaiyuan.management.dao.ProcureMapper;
 import com.kaiyuan.management.entity.CustomMedicasupplies;
-import com.kaiyuan.management.entity.Medicasupplies;
 import com.kaiyuan.management.entity.PurchasingApplication;
 import com.kaiyuan.management.entity.SupplierApplication;
 import com.kaiyuan.user.config.JqGridReturn;
@@ -56,13 +54,62 @@ public class ApplyforServiceImpl implements ApplyforService{
      */
     @Override
     public JqGridReturn selectApplyfor(Map<String, Object> map){
-
+        String username = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+        map.put("companyName",applyforMapper.queryCompanyName(username));
+        applyforMapper.queryCompanyName(username);
         List<SupplierApplication> list=applyforMapper.queryGysApplication(map);
         JqGridReturn jq=new JqGridReturn();
         jq.setRows(list);
         jq.setTotal(queryGysAppCount(map));
         jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
         return jq;
-
     }
+    @Override
+    public boolean updateApplyfor(PurchasingApplication purchasingApplication){
+        return applyforMapper.updateApplyfor(purchasingApplication);
+    }
+    @Override
+    public boolean updateStatusSC(Integer id){
+        return applyforMapper.updateStatusSC(id);
+    }
+    @Override
+    public boolean updateStatusTJ(Integer id){
+        return applyforMapper.updateStatusTJ(id);
+    }
+    @Override
+    public boolean updateStatusBTG(Integer id){
+        return applyforMapper.updateStatusBTG(id);
+    }
+    @Override
+    public boolean updateStatusTG(Integer id){
+        return applyforMapper.updateStatusTG(id);
+    }
+
+    @Override
+    public int querySpCount(Map<String, Object> map) {
+        return applyforMapper.querySpCount(map);
+    }
+
+    @Override
+    public List<SupplierApplication> querySpFy(Map<String, Object> map) {
+        return applyforMapper.querySpFy(map);
+    }
+
+    /**
+     * 分页查询
+     * @return
+     */
+    @Override
+    public JqGridReturn selectSpFy(Map<String, Object> map){
+
+        List<SupplierApplication> list=applyforMapper.querySpFy(map);
+        JqGridReturn jq=new JqGridReturn();
+        jq.setRows(list);
+        jq.setTotal(queryGysAppCount(map));
+        jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
+        return jq;
+    }
+
 }

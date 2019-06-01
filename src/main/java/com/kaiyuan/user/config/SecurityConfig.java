@@ -35,8 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers("/css/**","/fonts/**","/img/**","/js/**").permitAll()//,"/login"
-                .antMatchers("/favicon.ico").permitAll()
+                .antMatchers("/favicon.ico","/css/**","/fonts/**","/img/**","/js/**").permitAll()//,"/login"
                 .antMatchers("/","/common/**","/member/**","/index","/milestone","/addGysUserOne","/addGysUserTwo","/deliverinform","/updatePassword","/usermanagement/resetpassword","/member/zchcompany/{username}","/member/tymcompany/{username}").permitAll()
 //                .antMatchers("/admin/**").hasRole("ADMIN")
 //                .antMatchers("/admin/login").permitAll()

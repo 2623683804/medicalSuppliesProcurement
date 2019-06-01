@@ -31,6 +31,7 @@
         LEFT JOIN medical_information mi on mi.id= ms.medtion_id
         LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
         where  1=1
+        and pa.companyName=#{companyName}
         <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
         <if test="status!=null and status!=''">and pa.status = #{status}</if>
     </select>
@@ -41,6 +42,7 @@
         LEFT JOIN medical_information mi on mi.id= ms.medtion_id
         LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
         where  1=1
+        and pa.companyName=#{companyName}
         <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
         <if test="status!=null and status!=''">and pa.status = #{status}</if>
         <if test="start!=null">
@@ -48,4 +50,47 @@
         </if>
     </select>
 
+    <update id="updateApplyfor">
+        update purchasing_application
+        set  gysmoney = #{gysmoney},upadate_time=#{upadate_time}
+        where id=#{id}
+    </update>
+
+    <update id="updateStatusSC">
+       update purchasing_application set status = 4 where id=#{id}
+    </update>
+
+    <update id="updateStatusTJ">
+        update purchasing_application set status = 1 where id=#{id}
+    </update>
+
+    <update id="updateStatusBTG">
+        update purchasing_application set status = 3 where id=#{id}
+    </update>
+
+    <update id="updateStatusTG">
+        update purchasing_application set status = 2 where id=#{id}
+    </update>
+
+    <select id="querySpCount" resultType="java.lang.Integer">
+        select count(pa.id)
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
+        where  1=1 and pa.status in (2,3,1)
+        <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
+
+    </select>
+
+    <select id="querySpFy" parameterType="String"  resultType="com.kaiyuan.management.entity.SupplierApplication">
+        select pa.id,ms.number,ms.rel_quotation,pa.gysmoney,ms.delivery_time,pa.status as purapp_status,mi.name,mi.status as meinfo_status
+        from medica_supplies ms
+        LEFT JOIN medical_information mi on mi.id= ms.medtion_id
+        LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
+        where  1=1 and pa.status in (1,2,3)
+        <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
+        <if test="start!=null">
+            limit #{start} ,10
+        </if>
+    </select>
 </mapper>

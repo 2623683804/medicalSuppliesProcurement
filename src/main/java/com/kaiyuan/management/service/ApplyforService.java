@@ -19,4 +19,20 @@ public interface ApplyforService {
     List<SupplierApplication> queryGysApplication(Map<String, Object> map);
 
     JqGridReturn selectApplyfor(Map<String, Object> map);
+
+    boolean updateApplyfor(PurchasingApplication purchasingApplication);
+
+    boolean updateStatusSC(Integer id);
+
+    boolean updateStatusTJ(Integer id);
+
+    boolean updateStatusBTG(Integer id);
+
+    boolean updateStatusTG(Integer id);
+
+    int querySpCount(Map<String, Object> map);
+
+    List<SupplierApplication> querySpFy(Map<String, Object> map);
+
+    JqGridReturn selectSpFy(Map<String, Object> map);
 }

@@ -136,4 +136,19 @@ $(document).ready(function(){
         $(".pop-mask").css("display","none");
     }
     });
+
+
+    $('#xg').click(function(){
+        if($("#pop-wrap8").css('display')=='none'){
+            $("#pop-wrap8").css("display","block");
+            $(".pop-mask").css("display","block");
+        }else{
+            $("#pop-wrap8").css("display","none");
+            $(".pop-mask").css("display","none");
+        }
+    });
+    $("#right-wrap8").click(function(){
+        $("#pop-wrap8").css("display","none");
+        $(".pop-mask").css("display","none");
+    });
 });
