@@ -1,7 +1,6 @@
 package com.kaiyuan.management.dao;
 
 import com.kaiyuan.management.entity.CustomMedicasupplies;
-import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.management.entity.Medicasupplies;
 import org.apache.ibatis.annotations.Mapper;
 

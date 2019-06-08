@@ -1,7 +1,6 @@
 package com.kaiyuan.management.service;
 
 import com.kaiyuan.management.entity.MedicalInformation;
-import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.user.config.JqGridReturn;
 
 import java.text.ParseException;
@@ -10,10 +9,6 @@ import java.util.Map;
 
 public interface MedicalInformationServiceImpl {
 
-//    int queryAll(String name, String user_id, String status);
-//    int queryAll();
-
-//    List<MedicalInformation> querycxfyList(MedicalInformation medicalInformation, Page p);
 
     int queryCount(Map<String, Object> map);
 
@@ -27,7 +22,4 @@ public interface MedicalInformationServiceImpl {
 
     boolean update(MedicalInformation medicalInformation);
 
- //   List<MedicalInformation> queryfyList(Page p);
-
-//    List<MedicalInformation> querycxfyList(String name, String user_id, String status, int startrow,int pagesize);
 }

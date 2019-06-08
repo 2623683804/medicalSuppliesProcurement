@@ -62,17 +62,16 @@
 								<a id="snlc" th:href="@{/milestone}" class="pointer">公司介绍</a>
 							</li>
 						</ul>
-                        <div sec:authorize="isAuthenticated()">
-                            <div class="lastChild">
-                                <a id="myaccount" th:href="@{/usermanagement/account}" rel="nofollow"><i class="common-icon-New people-icon"></i>我的账户</a>
-                            </div>
-                        </div>
+
+						<div class="lastChild">
+							<a id="myaccount" th:href="@{/usermanagement/account}" rel="nofollow"><i class="common-icon-New people-icon"></i>我的账户</a>
+						</div>
 					</div>
 
 					<div id="sheader" class="width-wrap head-subNav cl" style="height: 0px; display: none; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
 						<ul class="hide" s_h="wytz">
 							<li>
-								<a th:href="@{/applyfor}">申请<span></span></a>
+								<a th:href="@{/purchasingrecords}">申请记录<span></span></a>
 							</li>
 							<li>
 								<a th:href="@{/deliverinform}">查询<span></span></a>

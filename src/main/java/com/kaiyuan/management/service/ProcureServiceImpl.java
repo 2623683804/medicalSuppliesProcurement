@@ -2,7 +2,6 @@ package com.kaiyuan.management.service;
 
 import com.kaiyuan.management.dao.ProcureMapper;
 import com.kaiyuan.management.entity.CustomMedicasupplies;
-import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.management.entity.Medicasupplies;
 import com.kaiyuan.user.config.JqGridReturn;
 import org.slf4j.Logger;

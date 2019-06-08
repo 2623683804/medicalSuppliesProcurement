@@ -7,13 +7,11 @@ import com.kaiyuan.management.service.ApplyforService;
 import com.kaiyuan.user.config.JqGridReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -107,6 +105,7 @@ public class ApplyforController {
     @GetMapping("/updateStatusTG/{id}")
     public ModelAndView updateStatusTG(@PathVariable("id") Integer id){
         applyforService.updateStatusTG(id);
+
         return new ModelAndView("redirect:/usermanagement/purchasingrecords");
     }
 

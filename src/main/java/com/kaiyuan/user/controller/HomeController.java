@@ -3,13 +3,12 @@ package com.kaiyuan.user.controller;
 
 import com.kaiyuan.management.service.ProcureService;
 import com.kaiyuan.user.config.JqGridReturn;
+import com.kaiyuan.user.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -20,18 +19,19 @@ public class HomeController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private ProcureService procureService;
-
+    @Resource
+    private UserServiceImpl userService;
 
     @RequestMapping("/")
-    public String indexL(Model model){
-        logger.info("/->index");
-        return "index";
+    public String indexL(){
+        return "redirect:index";
     }
-//    @RequestMapping("/whoim")
+//    @RequestMapping("/whoim")//已json的形式再页面显示Security上下文内容
 //    @ResponseBody
 //    public Object whoIm(){
 //        return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //    }
+
     @RequestMapping("/index")
     public String index(Model model){
         Map<String, Object> map = new HashMap<String, Object>();
@@ -75,12 +75,24 @@ public class HomeController {
         return "member/zchcompany";
     }
 
-
     @RequestMapping("/usermanagement/purchasingrecords")
     public String purchasingrecords(){
         return "usermanagement/purchasingrecords";
     }
 
 
+    @PostMapping(value = "/registerUserName")
+    @ResponseBody
+    public String registerUserName(@RequestBody Map<String,Object> map){
+        String username = (String) map.get("username");
+        logger.info(username);
+        if (userService.registerUserName(username)){
+            logger.info("true");
+            return "true";
+        }else {
+            logger.info("false");
+            return "false";
+        }
 
+    }
 }

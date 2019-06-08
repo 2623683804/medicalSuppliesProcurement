@@ -1,7 +1,5 @@
 package com.kaiyuan.user.controller;
 
-import com.kaiyuan.management.entity.MedicalInformation;
-import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.entity.SupplieDetails;
 import com.kaiyuan.user.entity.SysUser;
@@ -198,7 +196,6 @@ public class UserController {
 
     @PostMapping(value = "/addAndUpdateGly")
     public String addAndUpdateGly(Model model, SysUser sysUser) throws ParseException {
-        //Page p = new Page();
         List<SysUser> meList;
         if (sysUser.getId()==null){
             if (userService.addGly(sysUser)){

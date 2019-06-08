@@ -2,18 +2,15 @@ package com.kaiyuan.management.controller;
 
 
 import com.kaiyuan.management.entity.MedicalInformation;
-import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.management.service.MedicalInformationServiceImpl;
 import com.kaiyuan.user.config.JqGridReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -75,7 +72,6 @@ public class MedicalInformationController {
 
     @PostMapping(value = "/addorupdatemedical")
     public String addMedical(Model model,MedicalInformation medicalInformation) throws ParseException {
-        Page p = new Page();
         List<MedicalInformation> meList;
         if (medicalInformation.getId()==null){
             if (medicalInformationServiceImpl.add(medicalInformation)){

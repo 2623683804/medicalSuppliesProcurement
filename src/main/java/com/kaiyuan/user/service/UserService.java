@@ -1,6 +1,5 @@
 package com.kaiyuan.user.service;
 
-import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.user.config.JqGridReturn;
 import com.kaiyuan.user.dao.UserMapper;
 import com.kaiyuan.user.entity.SupplieDetails;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +20,11 @@ public class UserService implements UserServiceImpl{
 
     @Resource
     private UserMapper userMapper;
+
+    @Override
+    public boolean registerUserName(String username){
+        return username.equals(userMapper.findUserName(username));
+    }
 
     @Override
     @Transactional(propagation= Propagation.REQUIRED)

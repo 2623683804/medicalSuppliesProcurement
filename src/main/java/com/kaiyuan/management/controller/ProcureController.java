@@ -1,8 +1,6 @@
 package com.kaiyuan.management.controller;
 
-import com.kaiyuan.management.entity.MedicalInformation;
 import com.kaiyuan.management.entity.Medicasupplies;
-import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.management.service.ProcureService;
 import com.kaiyuan.user.config.JqGridReturn;
 import org.slf4j.Logger;
@@ -12,10 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.expression.Maps;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -26,14 +22,6 @@ public class ProcureController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     @Resource
     private ProcureService procureService;
-
-//    @RequestMapping("/getMedicalNameList")
-//    @ResponseBody
-//    public List<String>  getMedicalNameList(){
-//        List<String> sjm=procureService.querymMedName();
-//        logger.info(sjm.toString());
-//        return sjm;
-//    }
 
     // 进入到采购发布页面的初始化
     @GetMapping("/administrator/procurement")

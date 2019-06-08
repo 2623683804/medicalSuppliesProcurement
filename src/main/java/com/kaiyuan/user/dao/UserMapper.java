@@ -46,4 +46,6 @@ public interface UserMapper {
 
      boolean updateGlyUser(SysUser sysUser);
      boolean updateGlyRole(@Param("Sys_User_id")Integer Sys_User_id,@Param("glylx")String  glylx);
+
+    String findUserName(String username);
 }

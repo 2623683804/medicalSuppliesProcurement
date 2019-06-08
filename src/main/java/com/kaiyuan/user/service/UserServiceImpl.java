@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserServiceImpl {
-    boolean addGysUserOne(String username,String password);
+    boolean registerUserName(String username);
+
+    boolean addGysUserOne(String username, String password);
     boolean addGysUserTwo(SupplieDetails supplieDetails,String username);
 
     SupplieDetails queryGysAll(String username);

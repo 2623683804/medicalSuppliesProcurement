@@ -3,18 +3,13 @@ package com.kaiyuan.management.service;
 
 import com.kaiyuan.management.dao.MedicalInformationMapper;
 import com.kaiyuan.management.entity.MedicalInformation;
-import com.kaiyuan.management.entity.Page;
 import com.kaiyuan.user.config.JqGridReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -28,10 +23,6 @@ public class MedicalInformationService implements MedicalInformationServiceImpl 
     @Autowired
     private MedicalInformationMapper medicalInformationMapper;
 
-//    @Override
-//    public int  queryAll(String name,String user_id,String status) {
-//        return medicalInformationMapper.findQuery(name,user_id,status);
-//    }
 
     @Override
     public int queryCount(Map<String, Object> map) {
