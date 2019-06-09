@@ -31,14 +31,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/favicon.ico","/css/**","/fonts/**","/img/**","/js/**").permitAll()//,"/login"
-                .antMatchers("/usermanagement/resetpassword","/updatePassword").permitAll()
-                .antMatchers("/","/registerUserName","/common/**","/member/**","/index","/milestone","/addGysUserOne","/addGysUserTwo","/deliverinform","/member/zchcompany/{username}","/member/tymcompany/{username}").permitAll()
-                .antMatchers("/administrator/approval").hasRole("SPGLY")
-                .antMatchers("/administrator/procurement").hasRole("CGGLY")
-                .antMatchers("/administrator/medicalsupplies").hasRole("YYPGLY")
-                .antMatchers("/administrator/**").hasRole("ADMIN")
-                .antMatchers("/usermanagement/**").hasRole("USER")
+                .antMatchers("/favicon.ico","/css/**","/fonts/**","/img/**","/js/**").permitAll()
+                .antMatchers("/","/registerUserName","/usermanagement/resetpassword","/updatePassword","/common/**","/member/**","/index","/milestone","/addGysUserOne","/addGysUserTwo","/deliverinform","/member/zchcompany/{username}","/member/tymcompany/{username}").permitAll()
+                .antMatchers("/administrator/gldministrator","/administrator/supplier").hasRole("ADMIN")
+//                .antMatchers("/administrator/approval").hasRole("SPGLY")
+//                .antMatchers("/administrator/procurement").hasRole("CGGLY")
+//                .antMatchers("/administrator/medicalsupplies").hasRole("YYPGLY")
+//                .antMatchers("/usermanagement/**").hasRole("USER")
                 .anyRequest().authenticated() //任何请求,登录后可以访问
                 .and()
                 .formLogin()

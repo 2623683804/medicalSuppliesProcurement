@@ -17,9 +17,9 @@ public class ErrorPageController {
             case 404: model.addAttribute("code", 404);
             pager = "/common/error_404";
             break;
-            case 500: model.addAttribute("code", 500);
-            pager = "/common/error_500";
-            break;
+//            case 500: model.addAttribute("code", 500);
+//            pager = "/common/error_500";
+//            break;
         }
             return pager;
     }

@@ -48,7 +48,7 @@
                 </div>
                 <!--左侧导航结束-->
                 <!--右侧内容开始-->
-                <div id="right-content" class="right-wrap">
+                <div id="right-content1" class="right-wrap">
                     <div id="securitySetting" class=" white-bg add-border">
                         <div class="title cl">
                             <h3>采购申请记录 <span class="pl lh40 transaction-agreement"></span></h3>
@@ -129,22 +129,22 @@
                                         <td class="align-center" th:text="${SupplierApplication.gysmoney}"></td>
                                         <div th:if="${SupplierApplication.purapp_status} == 0">
                                         <td class="align-center">
-                                            <a class="button mb" onclick="return confirm('您确定要提交申请吗？')" th:href="@{'/submitApplyfor/'+${SupplierApplication.id}}">提交</a>
+                                            <a class="button mb" onclick="return confirm('您确定要提交申请吗？')" th:href="@{'/updateStatusTJ/'+${SupplierApplication.id}}">提交</a>
                                             <input id="xg" type="button" class="tjyyp1 button2 mb" th:onclick="'javascript:updateMed(\''+${SupplierApplication.id}+'\');'" value="修改" />
-                                            <a class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/deleteApplyfor/'+${SupplierApplication.id}}">删除</a>
+                                            <a class="button mb" onclick="return confirm('您确定要删除吗？')" th:href="@{'/updateStatusSC/'+${SupplierApplication.id}}">删除</a>
                                         </td>
                                         </div>
                                         <div th:if="${SupplierApplication.purapp_status} == 1">
-                                            --
+                                            <td class="align-center" >--</td>
                                         </div>
                                         <div th:if="${SupplierApplication.purapp_status} == 2">
-                                            --
+                                            <td class="align-center" >--</td>
                                         </div>
                                         <div th:if="${SupplierApplication.purapp_status} == 3">
-                                            --
+                                            <td class="align-center" >--</td>
                                         </div>
                                         <div th:if="${SupplierApplication.purapp_status} == 4">
-                                            --
+                                            <td class="align-center" >--</td>
                                         </div>
                                     </tr>
                                 </div>
@@ -180,10 +180,11 @@
             </div>
         </div>
 
-        <div th:include="common/footer" ></div>
 
 
 
+</div>
+    <div th:include="common/footer" ></div>
         <div class="pop-wrap" id="pop-wrap8" style="display:none;opacity: 1; width: 1000px; top: 26.5px; left: 200px;" >
             <div class="pop-title">
                 <a href="javascript:void(0);" class="right-wrap" id="right-wrap8">
@@ -192,7 +193,7 @@
                 <h3>修改申请订单</h3>
             </div>
             <div class="pop-pay">
-                <form id="form1" action="/updateApplyfor" method="post">
+                <form id="form1" action="/updateApplyfor" method="get">
                     <input id="yid"  type="text" name="id" value="" style="display:none">
                     <div class=" control-row">
                         <div class="control-label">
@@ -211,7 +212,7 @@
         </div>
         <div class="pop-mask" style="display: none;width: 1349px; height: 1796px; opacity: 0.5;"></div>
 
-    </div>
+
     </body>
     <script type="text/javascript" th:src="@{/js/core.js}" ></script>
 </html>

@@ -85,7 +85,7 @@ public class ApplyforController {
         return new ModelAndView("redirect:/usermanagement/purchasingrecords");
     }
 
-    @GetMapping("/updateStatusSC/{id}")
+    @GetMapping("/updateStatusSC/{id}")//删除
     public ModelAndView updateStatusSC(@PathVariable("id") Integer id){
         applyforService.updateStatusSC(id);
         return new ModelAndView("redirect:/usermanagement/purchasingrecords");
@@ -98,15 +98,15 @@ public class ApplyforController {
     }
     @GetMapping("/updateStatusBTG/{id}")
     public ModelAndView updateStatusBTG(@PathVariable("id") Integer id){
-        applyforService.updateStatusSC(id);
-        return new ModelAndView("redirect:/usermanagement/purchasingrecords");
+        applyforService.updateStatusBTG(id);
+        return new ModelAndView("redirect:/administrator/approval");
     }
 
     @GetMapping("/updateStatusTG/{id}")
     public ModelAndView updateStatusTG(@PathVariable("id") Integer id){
         applyforService.updateStatusTG(id);
 
-        return new ModelAndView("redirect:/usermanagement/purchasingrecords");
+        return new ModelAndView("redirect:/administrator/approval");
     }
 
     @GetMapping("/administrator/approval")

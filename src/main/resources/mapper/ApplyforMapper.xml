@@ -45,6 +45,7 @@
         and pa.companyName=#{companyName}
         <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
         <if test="status!=null and status!=''">and pa.status = #{status}</if>
+        order by pa.status
         <if test="start!=null">
             limit #{start} ,10
         </if>
@@ -52,7 +53,7 @@
 
     <update id="updateApplyfor">
         update purchasing_application
-        set  gysmoney = #{gysmoney},upadate_time=#{upadate_time}
+        set  gysmoney = #{gysmoney}
         where id=#{id}
     </update>
 
@@ -89,6 +90,7 @@
         LEFT JOIN purchasing_application pa on pa.mesu_id=ms.id
         where  1=1 and pa.status in (1,2,3)
         <if test="name!=null and name!=''">and mi.name like  concat('%',#{name},'%')</if>
+        order by pa.status
         <if test="start!=null">
             limit #{start} ,10
         </if>

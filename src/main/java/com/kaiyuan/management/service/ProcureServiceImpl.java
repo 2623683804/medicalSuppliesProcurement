@@ -109,7 +109,7 @@ public class ProcureServiceImpl implements ProcureService{
     @Override
     public JqGridReturn queryIndex(Map<String, Object> map){
 
-        List<CustomMedicasupplies> list=procureMapper.queryfbList(map);
+        List<CustomMedicasupplies> list=procureMapper.queryIndex(map);
         JqGridReturn jq=new JqGridReturn();
         jq.setRows(list);
         return jq;

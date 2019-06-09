@@ -99,10 +99,10 @@
 								</td>
 							</div>
 							<div th:if="${SupplierApplication.purapp_status} == 2">
-								--
+								<td class="align-center">--</td>
 							</div>
 							<div th:if="${SupplierApplication.purapp_status} == 3">
-								--
+								<td class="align-center">--</td>
 							</div>
 					    </tr>
 					    </tbody>
@@ -133,7 +133,7 @@
 
 				</div>
 			</div>
-			
+	<div th:include="common/footer" ></div>
 	</body>
 		<script type="text/javascript" th:src="@{js/core.js}"></script>
 </html>

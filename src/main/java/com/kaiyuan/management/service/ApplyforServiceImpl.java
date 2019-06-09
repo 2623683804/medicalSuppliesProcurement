@@ -107,7 +107,7 @@ public class ApplyforServiceImpl implements ApplyforService{
         List<SupplierApplication> list=applyforMapper.querySpFy(map);
         JqGridReturn jq=new JqGridReturn();
         jq.setRows(list);
-        jq.setTotal(queryGysAppCount(map));
+        jq.setTotal(querySpCount(map));
         jq.setTotolPage((jq.getTotal()/jq.getPageSize()+1));
         return jq;
     }
