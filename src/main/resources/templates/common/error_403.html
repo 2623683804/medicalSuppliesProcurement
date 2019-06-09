@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>403错误</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="c">
+    <p>
+        <img th:src="@{/img/403.png}" >
+    </p>
+    <p class="title">对不起，您没有权限访问该页面...</p>
+    <p>
+        <a class="button" th:href="@{/index}">
+            <span >网站首页</span>
+        </a>
+    </p>
+    <p class="text">高级SEO提示：您目前没有权限，请呼叫中心管理员。</p>
+</div>
+
+</body>
+</html>
